@@ -1,7 +1,7 @@
 <template>
 	<div>
     <h1>ICN Final Project API Example</h1>
-    <button id="test_button">Call API</button>
+    <button id="test_button" @click="callApi">Call API</button>
     <div>
       <h2> Barometer value: </h2>
       <p id="barometer">First Barometer value</p>
@@ -23,10 +23,10 @@
 
 <script>
 import BarChart from "../components/BarChart.vue";
+import axios from 'axios'
 
 export default {
   name: 'home',
-  AccessToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjlhYjliNzRlM2QxMjM1OGY5MjJmOTZiNDc3ZDIzOWFkMzhkYmJkZDc5OGM5YmIyYmJkYzQ2ZDFmNWUxMTMzMDU3ZTNkZDgyOTA3NjhiMzg5In0.eyJhdWQiOiIyIiwianRpIjoiOWFiOWI3NGUzZDEyMzU4ZjkyMmY5NmI0NzdkMjM5YWQzOGRiYmRkNzk4YzliYjJiYmRjNDZkMWY1ZTExMzMwNTdlM2RkODI5MDc2OGIzODkiLCJpYXQiOjE1NzM0NzE4NjgsIm5iZiI6MTU3MzQ3MTg2OCwiZXhwIjoxNjA1MDk0MjY4LCJzdWIiOiIyNyIsInNjb3BlcyI6W119.ooM1lHo5DBq-F0TbEP4zWQSjcpExXoS_mrG3OeBXajTG-VCWrr7l5fuaTamHF8-FccHY6mE_ckK94mk-eEaevPIdxDqul8kcF9S0fyVhHBYAr17gMkbZIqYDrcW4-G_qTvwnpAslKfqLZ7LRPLstwN8mEhHlnEnM1rDzo64Kj4ZhnvRq6L9ZEtpysNdzTpIsXyNaMcQwNk4Z13VlF-NzcEt7jBbDj8McELrw9KLnldrjZjs0cxv_drKLibIspO89goqARBVGNRR5YD4S4j9jyvup10aa2PPsBjPqb_ojEWkfR7eV5VzfDQLwt-uWQ9EFNj8CWc3PH-UrdLUddsCUFxbBFewHYfiB-xOyU7ek765rWxKpfK8I2DQGcr0uq3U8yobOIX3Uoia9yTJycc48xH0T9Rfc661enTwNQLfMUCQznTAI1HD69-gCl0DCVwB3LbpanGkpJc0aJzWPq-YftqfnVYITH5Jg00Ut1BiDW8gO_mIGH2v7voRPfHVP4oLOTXklJl1_WnqfcI6_gm3l1IpNSPRkP4BwSuSLeyLMkkOscEMmrqODt7iXOBfcNzzpPzoyJRS931sO03jTf_ilM6rahBWrR4oku6QjKVaHXqgpRI6ebeBoNJi2YJrysWyOg0HyxB463HcK4CUiI8KrM8xI-c0XG9e9bX0DAehEdHA",
   data() {
     return {
       dataa: {
@@ -62,6 +62,27 @@ export default {
   },
   components: {
     BarChart
+  },
+  methods: {
+    callApi: function () {
+      var macaddr = "?macaddr=" + "aa15ec12";
+      var date_filter = "&date_filter=" + "2020-1-10 12:00:00+-+2020-1-10 18:00:00";
+      axios.post("https://campus.kits.tw/ICN_API" + macaddr + date_filter, 
+                  null,
+                  { headers: {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImMzMDU5NTFjZGJmNGQ4MDM4M2IxOTA5MDhlNzBlOGZmMzA2Y2RkNjhhOWZhNTY1MWFlZTA0NzNkMTEwYTgwN2Y2MTgwMGZiMGI3NDhhZjdmIn0.eyJhdWQiOiIyIiwianRpIjoiYzMwNTk1MWNkYmY0ZDgwMzgzYjE5MDkwOGU3MGU4ZmYzMDZjZGQ2OGE5ZmE1NjUxYWVlMDQ3M2QxMTBhODA3ZjYxODAwZmIwYjc0OGFmN2YiLCJpYXQiOjE1NzYxNTkxMzEsIm5iZiI6MTU3NjE1OTEzMSwiZXhwIjoxNjA3NzgxNTMxLCJzdWIiOiIyNTIiLCJzY29wZXMiOltdfQ.hDDzk7StTJ0czRT8vHPJoQYxhTpbrr2auYdXyewXFW6yYtBdZFpRshsrRfLbX4pNXhQq_Q1orEe7gO0w_3HukCwWvXf0ajNL-Zvmuay5wcbiIYTaL_-w7nWtTshUVnOw2lX6DKHdxY1Q17nJvK0o39leChMAeIc88Oabx3gCprny983kA4LDwyPd3S5_Eu8J7i5giuR_ul3PF37W5Z2ymNRR3RBZaJkV2IEQAsHhiMmuNpjcKZXvU3zegS6Q-2dviNQsKWYnrSN8rMeq5xljDaOzCR-ueWDuDgmpYOo_nGqQusRJbLGdPy9BGs0_pWgb-yD2e4Fu34fBzg_CLaffSFaKxFEoz12GHwGfczu2NeVH69jp8vvuAzRBfo1Gm8PboBhm07MX3jlXhTM-P6IX4GxjfDcZFFVO7gygOJ6GRRM_1WtvB9XmEu2mA-AJ_BC08GU0JKx_qLo3N17WwnxPoaqNrqJ-v8RwBRBAfyVmUqh7nbJTLw4SnUYkoyjV6KX_RGIcT8Ovr4upyoDmYgnKwxy1Tsh3yMVgg7jGTMw_3IxgOdxcIn2H6pWQCYUqhp8NJuzvhDAz7XdwbAeJuYr6LwX-3Ei1KWHD04kzI8GZmfwmvPMxQGgLEkMVc028YM2cFPYtuGBRFxcxw3vmTB1dR7kAQ1W4u_ksfk415Ri6NQ4', 
+                                                      'Accept': 'application/json'}
+      })
+        .then((data) => {
+           console.log(data);
+        })
+        .catch((err) => {
+          if (err.status === '200') {
+            alert('API calling error: macaddr or url format error!')
+          } else {
+            alert('API is sleeping !')
+          }
+        })
+      }
   }
 }
 </script>
