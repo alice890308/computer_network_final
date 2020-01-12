@@ -1,5 +1,6 @@
 <template>
 	<div>
+    <img src="https://d11hze2rol5ty3.cloudfront.net/20180226_frist21_1.jpg" width="1550" height="800">
     <h1>ICN Final Project API Example</h1>
     <button id="test_button" @click="callApi">Call API</button>
     <div>
@@ -14,12 +15,22 @@
       <h2> Temperature value: </h2>
       <p id="temperature">First Temperature value</p>
     </div>
-      <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+    <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+    <hr>
+    <div style="font-size:15px; font-family:Microsoft JhengHei; color:#758184; text-align:left;
+                padding:100px; margin-top:10px; background-color:#f3f3f3;">
+      contect us
+    </div>
+    <i class="el-icon-edit"></i>
+    <i class="el-icon-share"></i>
+    <i class="el-icon-delete"></i>
+    <el-button type="primary" icon="el-icon-search">搜索</el-button>
   </div>
 </template>
 
 <style lang="scss" scoped>
 </style>
+
 
 <script>
 import BarChart from "../components/BarChart.vue";
