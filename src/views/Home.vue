@@ -1,6 +1,6 @@
 <template>
 	<div>
-    <h1>ICN Final Project API Example</h1>
+    <h1>Final Project Test1</h1>
     <button id="test_button" @click="callApi">Call API</button>
     <div>
       <h2> Barometer value: </h2>
@@ -14,7 +14,23 @@
       <h2> Temperature value: </h2>
       <p id="temperature">First Temperature value</p>
     </div>
-      <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+    <el-button>默认按钮</el-button>
+    <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+    <div>
+      <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
+        <el-radio-button label="top">top</el-radio-button>
+        <el-radio-button label="right">right</el-radio-button>
+        <el-radio-button label="bottom">bottom</el-radio-button>
+        <el-radio-button label="left">left</el-radio-button>
+      </el-radio-group>
+
+      <el-tabs :tab-position="tabPosition" style="height: 200px;">
+        <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+        <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+        <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+        <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+      </el-tabs>
+    </div>
   </div>
 </template>
 
@@ -29,6 +45,7 @@ export default {
   name: 'home',
   data() {
     return {
+      tabPosition: 'left',
       dataa: {
         labels: [
           "January",
