@@ -15,6 +15,19 @@
       <p id="temperature">First Temperature value</p>
     </div>
       <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+    <div>
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          year<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item disabled>2018</el-dropdown-item>
+          <el-dropdown-item>2019</el-dropdown-item>
+          <el-dropdown-item>2020</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+
   </div>
 </template>
 
