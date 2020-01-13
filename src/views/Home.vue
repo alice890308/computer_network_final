@@ -2,6 +2,7 @@
 	<div>
     <h1>Example</h1>
     <button id="test_button" @click="callApi">Call API</button>
+    <button @click="changeName">Change Name</button>
     <div>
       <h2> Barometer value: </h2>
       <p id="barometer">First Barometer value</p>
@@ -14,7 +15,7 @@
       <h2> Temperature value: </h2>
       <p id="temperature">First Temperature value</p>
     </div>
-      <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+      <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions"/>
   </div>
 </template>
 
@@ -35,8 +36,9 @@ export default {
   name: 'home',
   data() {
     return {
-      week_data: {},
+      weekdata: {},
       all_data: {},
+      week_selected: "0105010601070108010901100111",
       dataa: {
         labels: [
           "January",
@@ -74,8 +76,8 @@ export default {
   methods: {
     callApi: function () {
       var macaddr = "?macaddr=" + "aa15ec12";
-      var date_filter = "&date_filter=" + "2019-12-8 00:00:00+-+2020-1-13 15:54:00";
-      axios.post("https://campus.kits.tw/ICN_API" + macaddr + date_filter, 
+      //var date_filter = "&date_filter=" + "2019-12-8 00:00:00+-+2020-1-13 15:54:00";
+      axios.post("https://campus.kits.tw/ICN_API" + macaddr/* + date_filter*/, 
                   null,
                   { headers: {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImMzMDU5NTFjZGJmNGQ4MDM4M2IxOTA5MDhlNzBlOGZmMzA2Y2RkNjhhOWZhNTY1MWFlZTA0NzNkMTEwYTgwN2Y2MTgwMGZiMGI3NDhhZjdmIn0.eyJhdWQiOiIyIiwianRpIjoiYzMwNTk1MWNkYmY0ZDgwMzgzYjE5MDkwOGU3MGU4ZmYzMDZjZGQ2OGE5ZmE1NjUxYWVlMDQ3M2QxMTBhODA3ZjYxODAwZmIwYjc0OGFmN2YiLCJpYXQiOjE1NzYxNTkxMzEsIm5iZiI6MTU3NjE1OTEzMSwiZXhwIjoxNjA3NzgxNTMxLCJzdWIiOiIyNTIiLCJzY29wZXMiOltdfQ.hDDzk7StTJ0czRT8vHPJoQYxhTpbrr2auYdXyewXFW6yYtBdZFpRshsrRfLbX4pNXhQq_Q1orEe7gO0w_3HukCwWvXf0ajNL-Zvmuay5wcbiIYTaL_-w7nWtTshUVnOw2lX6DKHdxY1Q17nJvK0o39leChMAeIc88Oabx3gCprny983kA4LDwyPd3S5_Eu8J7i5giuR_ul3PF37W5Z2ymNRR3RBZaJkV2IEQAsHhiMmuNpjcKZXvU3zegS6Q-2dviNQsKWYnrSN8rMeq5xljDaOzCR-ueWDuDgmpYOo_nGqQusRJbLGdPy9BGs0_pWgb-yD2e4Fu34fBzg_CLaffSFaKxFEoz12GHwGfczu2NeVH69jp8vvuAzRBfo1Gm8PboBhm07MX3jlXhTM-P6IX4GxjfDcZFFVO7gygOJ6GRRM_1WtvB9XmEu2mA-AJ_BC08GU0JKx_qLo3N17WwnxPoaqNrqJ-v8RwBRBAfyVmUqh7nbJTLw4SnUYkoyjV6KX_RGIcT8Ovr4upyoDmYgnKwxy1Tsh3yMVgg7jGTMw_3IxgOdxcIn2H6pWQCYUqhp8NJuzvhDAz7XdwbAeJuYr6LwX-3Ei1KWHD04kzI8GZmfwmvPMxQGgLEkMVc028YM2cFPYtuGBRFxcxw3vmTB1dR7kAQ1W4u_ksfk415Ri6NQ4', 
                                                       'Accept': 'application/json'}
@@ -85,8 +87,8 @@ export default {
           /* 會用到的變數 */
           var count = 0;
           var data_num = response["data"]["length"]
-          console.log(response["data"][0]["created_at"].substr(5, 6) + ", lenth = " + response["data"][0]["created_at"].substr(5, 6).length)
-          var cur_date = response["data"][0]["created_at"].substr(5, 6)
+          var cur_date = response["data"][0]["created_at"].substring(5, 10)
+          console.log(cur_date)
           var all_shaking_count = {}
 
           for(var i  = 0; i < data_num; i++) {
@@ -95,10 +97,10 @@ export default {
             var acc_z = response["data"][i]["acc_z"]
 
             /* 若是當前進來的資料時間與前一個不同，表示已經是下一天了 */
-            if (response["data"][i]["created_at"].substr(5, 6) != cur_date) {
+            if (response["data"][i]["created_at"].substring(5, 10) != cur_date) {
               all_shaking_count[cur_date] = count
               count = 0
-              cur_date = response["data"][i]["created_at"].substr(5, 6)
+              cur_date = response["data"][i]["created_at"].substring(5, 10)
             }
 
             /* 如果有震動，count++ */
@@ -106,7 +108,10 @@ export default {
               count++;
             }
           }
-          console.log(all_shaking_count)
+          all_shaking_count[cur_date] = count
+          this.all_data = all_shaking_count
+          //console.log(this.all_data)
+          this.weekBarChartData()
       })
       .catch((err) => {
         if (err.status === '200') {
@@ -115,6 +120,40 @@ export default {
           alert(err)
         }
       })
+    },
+    weekBarChartData: function() {
+      //var r_weekdata = {}
+      var label = []
+      var data = []
+      for(var i = 0; i < 7; i++)
+      {
+        var cur_date = this.week_selected.substring(i*4, i*4+2) + "-" + this.week_selected.substring(i*4+2, i*4+4)
+        
+        label.push(cur_date)
+
+        if (this.all_data.hasOwnProperty(cur_date)) {
+          data.push(this.all_data[cur_date])
+        } else {
+          data.push(0)
+        }
+      }
+
+      //var temp = {}
+      this.weekdata["labels"] = label
+      this.weekdata["datasets"] = [{
+        label: "Weekly Analysis",
+        backgroundColor: "#3282b8",
+        data: data
+      }]
+      console.log(this.weekdata)
+      //this.weekdata = temp
+      //console.log("weekdata = " + temp)
+    },
+    changeName: function(){
+      console.log(this.dataa["labels"][0])
+      console.log("click change name!")
+      this.dataa["labels"][0] = "Mei"
+      console.log(this.dataa["labels"][0])
     }
   }
 }
