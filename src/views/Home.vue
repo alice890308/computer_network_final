@@ -2,15 +2,15 @@
 	<div>
 
     <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" width="1550" height="800">
-    <h1>ICN Final Project API Example</h1>
-    <button id="test_button" @click="callApi">Call API</button>
+    <!--h1>ICN Final Project API Example</h1>
+    <button id="test_button" @click="callApi">Call API</button-->
 
     <!-- <h1>Example</h1>
     <button id="test_button" @click="callApi">Call API</button> -->
     
-
+    <hr>
     <div>
-      <el-tabs :tab-position="tabPosition" style="height: 600px;">
+      <el-tabs :tab-position="tabPosition" style="height: 710px;">
         <el-tab-pane label="Welcome">
           <h1>Welcome</h1>
         </el-tab-pane>
@@ -28,7 +28,7 @@
               </el-date-picker>
             </div>
             <div>
-              <h2 id="TotalHour">Pass 4 weeks</h2> 
+              <h2 id="TotalHour">Pass 2 months</h2> 
               <h2 id="titlebarometerforday"> Barometer value: </h2>
               <p id="barometerforday">First Barometer value</p>
             </div>
@@ -39,6 +39,10 @@
             <div>
               <h2 id="titletemperatureforday"> Temperature value: </h2>
               <p id="temperatureforday">First Temperature value</p>
+            </div>
+            <div>
+              <h2 id="titletimesforday"> Exercise times: </h2>
+              <p id="timesforday">First Exercise times</p>
             </div>
           </div>
         </el-tab-pane>
@@ -117,39 +121,76 @@
     font-size: 12px;
   }
   .block{
+    // position:relative;
+    // top:150px;
+    // margin-top:200px; 
+    padding-top : 200px; 
+    background-color:white;
+    position:relative;
+
   }
   #headerforday{
     color: #698474;
   }
   .DailyData{
-    //margin-top:10px; 
+    margin-top:10px; 
     background-color:white;
-    //osition:relative;
+    osition:relative;
     width: 1400px;
-    height: 700px;
+    height: 750px;
 
     #barometerforday{
-    color: #8ac6d1;
+      position:relative;
+      top:-250px;
+      left:450px;
+      color: #8ac6d1;
     }
     #humidityforday{
+      position:relative;
+      top:-225px;
+      left:450px;
       color: #8ac6d1;
     }
     #temperatureforday{
+      position:relative;
+      top:-200px;
+      left:450px;
+      color: #8ac6d1;
+    }
+    #timesforday{
+      position:relative;
+      top:-175px;
+      left:450px;
       color: #8ac6d1;
     }
     #titlebarometerforday{
+      position:relative;
+      top:-250px;
+      left:450px;
       color: #2c7873;
     }
     #titlehumidityforday{
+      position:relative;
+      top:-225px;
+      left:450px;
       color: #2c7873;
     }
     #titletemperatureforday{
+      position:relative;
+      top:-200px;
+      left:450px;
+      color: #2c7873;
+    }
+    #titletimesforday{
+      position:relative;
+      top:-175px;
+      left:450px;
       color: #2c7873;
     }
     #TotalHour{
       position:relative;
-      top:0px;
-      left:-35px;
+      top:-150px;
+      left:-450px;
       color: #698474;
     }
   }
@@ -176,11 +217,11 @@
     width: 1550px;
     height: 220px;
     #social_media{
-      color : #be8abf;
-      font-size : 20px;
+      color : #015668;
+      font-size : 16px;
       font-family : Microsoft JhengHei;
       font-weight : bold;
-      letter-spacing:8px;
+      letter-spacing:10px;
       word-spacing:5px;
 
       position:relative;
@@ -197,14 +238,14 @@
 
       position:relative;
       top:80px;
-      left:0px;
+      left:30px;
     }
     .el-icon-user{
       font-size:25px;
       opacity:0.8;
       position:relative;
       top:48px;
-      left:-740px;
+      left:-710px;
     }
   }
 
