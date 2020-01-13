@@ -1,34 +1,35 @@
 <template>
 	<div>
-    <h1>Example</h1>
-    <button id="test_button" @click="callApi">Call API</button>
+    <!-- <h1>Example</h1>
+    <button id="test_button" @click="callApi">Call API</button> -->
+    
     <div>
-      <h2> Barometer value: </h2>
-      <p id="barometer">First Barometer value</p>
-    </div>
-    <div>
-      <h2> Humudity value: </h2>
-      <p id="humidity">First Humudity value</p>
-    </div>
-    <div>
-      <h2> Temperature value: </h2>
-      <p id="temperature">First Temperature value</p>
-    </div>
-    <el-button>默认按钮</el-button>
-    <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
-    <div>
-      <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
-        <el-radio-button label="top">top</el-radio-button>
-        <el-radio-button label="right">right</el-radio-button>
-        <el-radio-button label="bottom">bottom</el-radio-button>
-        <el-radio-button label="left">left</el-radio-button>
-      </el-radio-group>
+      <el-tabs :tab-position="tabPosition" style="height: 1200px;">
+        <el-tab-pane label="Welcome">
+          <h1>Welcome</h1>
+        </el-tab-pane>
+          
+        <el-tab-pane label="Daily Report">
+          <h1>Daily Report</h1>
+          <div>
+            <h2> Barometer value: </h2>
+            <p id="barometer">First Barometer value</p>
+          </div>
+        </el-tab-pane>
 
-      <el-tabs :tab-position="tabPosition" style="height: 200px;">
-        <el-tab-pane label="用户管理">用户管理</el-tab-pane>
-        <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-        <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-        <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+        <el-tab-pane label="Weekly Report">
+          <h1>Weekly Report</h1>
+          <div>
+            <h2> Humudity value: </h2>
+            <p id="humidity">First Humudity value</p>
+          </div>
+          <div>
+            <h2> Temperature value: </h2>
+            <p id="temperature">First Temperature value</p>
+          </div>
+          
+        </el-tab-pane>
+        <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
       </el-tabs>
     </div>
   </div>
@@ -51,7 +52,7 @@ export default {
   name: 'home',
   data() {
     return {
-      tabPosition: 'left',
+      tabPosition: 'right',
       dataa: {
         labels: [
           "January",
