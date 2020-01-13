@@ -19,10 +19,10 @@
       <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
     <div>
     </div>
-       <h2> Daily Result: </h2>
+    <h1 id = "headerforday"> Daily Result: </h1>
     <div class="block">
       <span class="demonstration">SeeYourDailyResult</span>
-      <el-date-picker
+      <el-date-picker @command="handleCommand"
         v-model="dayselect"
         type="date"
         :picker-options="pickerOptions"
@@ -30,8 +30,22 @@
         placeholder="Choose the date">
       </el-date-picker>
     </div>
+    <div class="OneDayData">
+      <div>
+        <h2 id="TotalHour">Pass 4 weeks</h2> 
+        <h2 id="titlebarometerforday"> Barometer value: </h2>
+        <p id="barometerforday">First Barometer value</p>
+      </div>
+      <div>
+        <h2 id="titlehumidityforday"> Humudity value: </h2>
+        <p id="humidityforday">First Humudity value</p>
+      </div>
+      <div>
+        <h2 id="titletemperatureforday"> Temperature value: </h2>
+        <p id="temperatureforday">First Temperature value</p>
+      </div>
+    </div>
     <hr>
-    
     <div class="bottom">
       <p id="social_media">get in touch</p>
       <a href="https://www.facebook.com/" target="_blank">
@@ -80,6 +94,35 @@
   .el-icon-arrow-down {
     font-size: 12px;
   }
+  .block{
+  }
+  #barometerforday{
+    color: #8ac6d1;
+  }
+  #humidityforday{
+    color: #8ac6d1;
+  }
+  #temperatureforday{
+    color: #8ac6d1;
+  }
+  #headerforday{
+    color: #698474;
+  }
+  #titlebarometerforday{
+    color: #2c7873;
+  }
+  #titlehumidityforday{
+    color: #2c7873;
+  }
+  #titletemperatureforday{
+    color: #2c7873;
+  }
+  #TotalHour{
+    //position: relative;
+    margin-right: 1000px;
+    color: #698474;
+  }
+  
   .bottom{
     margin-top:10px; 
     background-color:#f3f3f3;
@@ -172,15 +215,6 @@ export default {
   },
 
   methods: {
-    handleCommandY(command) {
-      this.$message('Choose the year ' + command);
-    },
-    handleCommandM(command) {
-      this.$message('Choose the month ' + command);
-    },
-    handleCommandD(command) {
-      this.$message('Choose the day ' + command);
-    },
     dealDisabledDate (time) {
       let day = 60 * 24 * 3600 * 1000
       return time.getTime() > Date.now() || time.getTime() + day < Date.now()
