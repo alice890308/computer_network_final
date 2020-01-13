@@ -15,7 +15,7 @@
       <h2> Temperature value: </h2>
       <p id="temperature">First Temperature value</p>
     </div>
-      <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions"/>
+      <BarChart v-bind:dataset="dataa" v-bind:chartoptions="chartoptions"/>
   </div>
 </template>
 
@@ -31,7 +31,6 @@
 <script>
 import BarChart from "../components/BarChart.vue";
 import axios from 'axios'
-
 export default {
   name: 'home',
   data() {
@@ -90,19 +89,16 @@ export default {
           var cur_date = response["data"][0]["created_at"].substring(5, 10)
           console.log(cur_date)
           var all_shaking_count = {}
-
           for(var i  = 0; i < data_num; i++) {
             var acc_x = response["data"][i]["acc_x"]
             var acc_y = response["data"][i]["acc_y"]
             var acc_z = response["data"][i]["acc_z"]
-
             /* 若是當前進來的資料時間與前一個不同，表示已經是下一天了 */
             if (response["data"][i]["created_at"].substring(5, 10) != cur_date) {
               all_shaking_count[cur_date] = count
               count = 0
               cur_date = response["data"][i]["created_at"].substring(5, 10)
             }
-
             /* 如果有震動，count++ */
             if (acc_x != null || acc_y != null || acc_z != null){
               count++;
@@ -130,14 +126,12 @@ export default {
         var cur_date = this.week_selected.substring(i*4, i*4+2) + "-" + this.week_selected.substring(i*4+2, i*4+4)
         
         label.push(cur_date)
-
         if (this.all_data.hasOwnProperty(cur_date)) {
           data.push(this.all_data[cur_date])
         } else {
           data.push(0)
         }
       }
-
       //var temp = {}
       this.weekdata["labels"] = label
       this.weekdata["datasets"] = [{
@@ -153,6 +147,7 @@ export default {
       console.log(this.dataa["labels"][0])
       console.log("click change name!")
       this.dataa["labels"][0] = "Mei"
+      this.dataa = Object.assign(this.dataa, {})
       console.log(this.dataa["labels"][0])
     }
   }
