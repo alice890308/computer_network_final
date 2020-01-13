@@ -11,6 +11,16 @@ export default {
     chartoptions: {
       type: Object,
       default: null
+    },
+    shouldRender: {
+      type: Boolean,
+      default: false
+    }
+  },
+  watch: {
+    shouldRender() {
+      this.renderChart(this.dataset, this.chartoptions);
+      if (this.shouldRender) this.$emit('completeRender');
     }
   },
   mounted() {
