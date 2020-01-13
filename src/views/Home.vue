@@ -10,48 +10,64 @@
     
 
     <div>
-      <el-tabs :tab-position="tabPosition" style="height: 1200px;">
+      <el-tabs :tab-position="tabPosition" style="height: 600px;">
         <el-tab-pane label="Welcome">
           <h1>Welcome</h1>
         </el-tab-pane>
         <el-tab-pane label="Daily Report">
-          <h1>Daily Report</h1>
-          <h2> Daily Result: </h2>
-          <div class="block">
-            <span class="demonstration">SeeYourDailyResult</span>
-            <el-date-picker
-              v-model="dayselect"
-              type="date"
-              :picker-options="pickerOptions"
-              value-format="yyyy-MM-dd"
-              placeholder="Choose the date">
-            </el-date-picker>
-          </div>
-          <div>
-            <h2> Barometer value: </h2>
-            <p id="barometer">First Barometer value</p>
+          <div  class="DailyData">
+            <h1>Daily Report</h1>
+            <div class="block">
+              <span class="demonstration">SeeYourDailyResult</span>
+              <el-date-picker
+                v-model="dayselect"
+                type="date"
+                :picker-options="pickerOptions"
+                value-format="yyyy-MM-dd"
+                placeholder="Choose the date">
+              </el-date-picker>
+            </div>
+            <div>
+              <h2 id="TotalHour">Pass 4 weeks</h2> 
+              <h2 id="titlebarometerforday"> Barometer value: </h2>
+              <p id="barometerforday">First Barometer value</p>
+            </div>
+            <div>
+              <h2 id="titlehumidityforday"> Humudity value: </h2>
+              <p id="humidityforday">First Humudity value</p>
+            </div>
+            <div>
+              <h2 id="titletemperatureforday"> Temperature value: </h2>
+              <p id="temperatureforday">First Temperature value</p>
+            </div>
           </div>
         </el-tab-pane>
         <el-tab-pane label="Weekly Report">
           <h1>Weekly Report</h1>
-          <div>
+          <!-- <div>
             <h2> Humudity value: </h2>
             <p id="humidity">First Humudity value</p>
           </div>
           <div>
             <h2> Temperature value: </h2>
             <p id="temperature">First Temperature value</p>
+          </div> -->
+          <div class="SelectWeek">
+            <el-select v-model="value" placeholder="--SelectWeek--">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </div>
         </el-tab-pane>
         <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
       </el-tabs>
     </div>
-      
-    <div>
-    </div>
-       
-    <hr>
     
+    <hr>
     <div class="bottom">
       <p id="social_media">get in touch</p>
       <a href="https://www.facebook.com/" target="_blank">
@@ -99,6 +115,59 @@
   }
   .el-icon-arrow-down {
     font-size: 12px;
+  }
+  .block{
+  }
+  #headerforday{
+    color: #698474;
+  }
+  .DailyData{
+    //margin-top:10px; 
+    background-color:white;
+    //osition:relative;
+    width: 1400px;
+    height: 700px;
+
+    #barometerforday{
+    color: #8ac6d1;
+    }
+    #humidityforday{
+      color: #8ac6d1;
+    }
+    #temperatureforday{
+      color: #8ac6d1;
+    }
+    #titlebarometerforday{
+      color: #2c7873;
+    }
+    #titlehumidityforday{
+      color: #2c7873;
+    }
+    #titletemperatureforday{
+      color: #2c7873;
+    }
+    #TotalHour{
+      position:relative;
+      top:0px;
+      left:-35px;
+      color: #698474;
+    }
+  }
+  .SelectWeek{
+    margin-top:0px; 
+    margin-left: -800px;
+    background-color:white;
+    position:relative;
+    // width: 1650px; // selectweek block's height (count from title's head)
+    // height: 220px;
+    #title{
+      color : #be8abf;
+      font-size : 20px;
+      font-family : Microsoft JhengHei;
+      font-weight : bold;
+      letter-spacing:8px;
+      word-spacing:5px;
+    }
   }
   .bottom{
     margin-top:10px; 
@@ -185,7 +254,21 @@ export default {
       chartoptions: {
         responsive: true,
         maintainAspectRatio: false
-      }
+      },
+      options: [{
+        value: '191201-191207',
+        label: '191201-191207'
+      }, {
+        value: '191208-191214',
+        label: '191208-191214'
+      }, {
+        value: '191215-191223',
+        label: '191215-191223'
+      }, {
+        value: '191222-191231',
+        label: '191222-191231'
+      }],
+      value: ''
     }
   },
   components: {
@@ -193,15 +276,6 @@ export default {
   },
 
   methods: {
-    handleCommandY(command) {
-      this.$message('Choose the year ' + command);
-    },
-    handleCommandM(command) {
-      this.$message('Choose the month ' + command);
-    },
-    handleCommandD(command) {
-      this.$message('Choose the day ' + command);
-    },
     dealDisabledDate (time) {
       let day = 60 * 24 * 3600 * 1000
       return time.getTime() > Date.now() || time.getTime() + day < Date.now()
