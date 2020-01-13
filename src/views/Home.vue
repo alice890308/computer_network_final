@@ -1,35 +1,55 @@
 <template>
 	<div>
+
     <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" width="1550" height="800">
     <h1>ICN Final Project API Example</h1>
-    <h1>Example</h1>
     <button id="test_button" @click="callApi">Call API</button>
+
+    <!-- <h1>Example</h1>
+    <button id="test_button" @click="callApi">Call API</button> -->
+    
+
     <div>
-      <h2> Barometer value: </h2>
-      <p id="barometer">First Barometer value</p>
+      <el-tabs :tab-position="tabPosition" style="height: 1200px;">
+        <el-tab-pane label="Welcome">
+          <h1>Welcome</h1>
+        </el-tab-pane>
+        <el-tab-pane label="Daily Report">
+          <h1>Daily Report</h1>
+          <h2> Daily Result: </h2>
+          <div class="block">
+            <span class="demonstration">SeeYourDailyResult</span>
+            <el-date-picker
+              v-model="dayselect"
+              type="date"
+              :picker-options="pickerOptions"
+              value-format="yyyy-MM-dd"
+              placeholder="Choose the date">
+            </el-date-picker>
+          </div>
+          <div>
+            <h2> Barometer value: </h2>
+            <p id="barometer">First Barometer value</p>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="Weekly Report">
+          <h1>Weekly Report</h1>
+          <div>
+            <h2> Humudity value: </h2>
+            <p id="humidity">First Humudity value</p>
+          </div>
+          <div>
+            <h2> Temperature value: </h2>
+            <p id="temperature">First Temperature value</p>
+          </div>
+        </el-tab-pane>
+        <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+      </el-tabs>
     </div>
+      
     <div>
-      <h2> Humudity value: </h2>
-      <p id="humidity">First Humudity value</p>
     </div>
-    <div>
-      <h2> Temperature value: </h2>
-      <p id="temperature">First Temperature value</p>
-    </div>
-      <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
-    <div>
-    </div>
-       <h2> Daily Result: </h2>
-    <div class="block">
-      <span class="demonstration">SeeYourDailyResult</span>
-      <el-date-picker
-        v-model="dayselect"
-        type="date"
-        :picker-options="pickerOptions"
-        value-format="yyyy-MM-dd"
-        placeholder="Choose the date">
-      </el-date-picker>
-    </div>
+       
     <hr>
     
     <div class="bottom">
@@ -136,6 +156,7 @@ export default {
         }
       },
       dayselect: '',
+      tabPosition: 'right',
       dataa: {
         labels: [
           "January",
