@@ -104,7 +104,7 @@
     margin-top:10px; 
     background-color:#f3f3f3;
     position:relative;
-    width: 1650px;
+    width: 1550px;
     height: 220px;
     #social_media{
       color : #be8abf;
