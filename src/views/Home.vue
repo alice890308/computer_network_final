@@ -1,18 +1,23 @@
 <template>
 	<div>
-
     <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" width="1550" height="800">
-    <h1>ICN Final Project API Example</h1>
-    <button id="test_button" @click="callApi">Call API</button>
+    <!--h1>ICN Final Project API Example</h1>
+    <button id="test_button" @click="callApi">Call API</button-->
 
     <!-- <h1>Example</h1>
     <button id="test_button" @click="callApi">Call API</button> -->
-    
-
+    <hr>
     <div>
-      <el-tabs :tab-position="tabPosition" style="height: 600px;">
+      <el-tabs :tab-position="tabPosition" style="height: 710px;">
         <el-tab-pane label="Welcome">
-          <h1>Welcome</h1>
+          <div  class="introduction">
+            <h1>Welcome</h1>
+            <div>
+              <p id="text_introduction"> 追蹤使用者的活動情況是否隨著環境溫溼度改變 </p><br>
+              <p id="text_introduction"> 提供使用者檢視自己的活動程度的平台 </p><br>
+              <p id="text_introduction"> 了解自身的習慣進而促進平日活動量 </p><br>
+            </div>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="Daily Report">
           <div  class="DailyData">
@@ -28,7 +33,7 @@
               </el-date-picker>
             </div>
             <div>
-              <h2 id="TotalHour">Pass 4 weeks</h2> 
+              <h2 id="TotalHour">Pass 2 months</h2> 
               <h2 id="titlebarometerforday"> Barometer value: </h2>
               <p id="barometerforday">First Barometer value</p>
             </div>
@@ -39,6 +44,10 @@
             <div>
               <h2 id="titletemperatureforday"> Temperature value: </h2>
               <p id="temperatureforday">First Temperature value</p>
+            </div>
+            <div>
+              <h2 id="titletimesforday"> Exercise times: </h2>
+              <p id="timesforday">First Exercise times</p>
             </div>
           </div>
         </el-tab-pane>
@@ -117,39 +126,95 @@
     font-size: 12px;
   }
   .block{
+    // position:relative;
+    // top:150px;
+    // margin-top:200px; 
+    padding-top : 200px; 
+    background-color:white;
+    position:relative;
+
   }
   #headerforday{
     color: #698474;
   }
-  .DailyData{
-    //margin-top:10px; 
+  .introduction{
+    margin-top:10px; 
     background-color:white;
-    //osition:relative;
+    position:relative;
     width: 1400px;
-    height: 700px;
+    height: 750px;
+
+    #text_introduction{
+      position:relative;
+      top:150px;
+      left:0px;
+      color: #8bbabb;
+      font-family:Microsoft JhengHei;
+      font-size:23px;
+      font-weight : bold;
+      letter-spacing:8px;
+      word-spacing:5px;
+    }
+  }
+  .DailyData{
+    margin-top:10px; 
+    background-color:white;
+    position:relative;
+    width: 1400px;
+    height: 750px;
 
     #barometerforday{
-    color: #8ac6d1;
+      position:relative;
+      top:-250px;
+      left:450px;
+      color: #8ac6d1;
     }
     #humidityforday{
+      position:relative;
+      top:-225px;
+      left:450px;
       color: #8ac6d1;
     }
     #temperatureforday{
+      position:relative;
+      top:-200px;
+      left:450px;
+      color: #8ac6d1;
+    }
+    #timesforday{
+      position:relative;
+      top:-175px;
+      left:450px;
       color: #8ac6d1;
     }
     #titlebarometerforday{
+      position:relative;
+      top:-250px;
+      left:450px;
       color: #2c7873;
     }
     #titlehumidityforday{
+      position:relative;
+      top:-225px;
+      left:450px;
       color: #2c7873;
     }
     #titletemperatureforday{
+      position:relative;
+      top:-200px;
+      left:450px;
+      color: #2c7873;
+    }
+    #titletimesforday{
+      position:relative;
+      top:-175px;
+      left:450px;
       color: #2c7873;
     }
     #TotalHour{
       position:relative;
-      top:0px;
-      left:-35px;
+      top:-150px;
+      left:-450px;
       color: #698474;
     }
   }
@@ -176,11 +241,11 @@
     width: 1550px;
     height: 220px;
     #social_media{
-      color : #be8abf;
-      font-size : 20px;
+      color : #015668;
+      font-size : 16px;
       font-family : Microsoft JhengHei;
       font-weight : bold;
-      letter-spacing:8px;
+      letter-spacing:10px;
       word-spacing:5px;
 
       position:relative;
@@ -197,14 +262,14 @@
 
       position:relative;
       top:80px;
-      left:0px;
+      left:30px;
     }
     .el-icon-user{
       font-size:25px;
       opacity:0.8;
       position:relative;
       top:48px;
-      left:-740px;
+      left:-710px;
     }
   }
 
@@ -256,17 +321,26 @@ export default {
         maintainAspectRatio: false
       },
       options: [{
-        value: '191201-191207',
+        value: '1201-1202-1203-1204-1205-1206-1207',
         label: '191201-191207'
       }, {
-        value: '191208-191214',
+        value: '1208-1209-1210-1211-1212-1213-1214',
         label: '191208-191214'
       }, {
-        value: '191215-191223',
+        value: '1215-1216-1217-1218-1219-1220-1221',
         label: '191215-191223'
       }, {
-        value: '191222-191231',
-        label: '191222-191231'
+        value: '1222-1223-1224-1225-1226-1227-1228',
+        label: '191222-191228'
+      }, {
+        value: '1229-1230-1231-0101-0102-0103-0104',
+        label: '1229-200104'
+      }, {
+        value: '0105-0106-0107-0108-0109-0110-0111',
+        label: '200105-200111'
+      }, {
+        value: '0112-0113-0114-0115-0116-0117-0118',
+        label: '200112-200118'
       }],
       value: ''
     }
@@ -303,4 +377,3 @@ export default {
 }
 
 </script>
-
