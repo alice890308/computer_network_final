@@ -27,7 +27,16 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-
+    <div class="block">
+      <span class="demonstration">GetWhatYouWant</span>
+      <el-date-picker
+        v-model="value1"
+        type="date"
+        :picker-options="pickerOptions"
+        value-format="timestamp"
+        placeholder="Choose the date">
+      </el-date-picker>
+    </div>
   </div>
 </template>
 
@@ -38,6 +47,14 @@
   #barometer {
     color:bisque;
   }
+  .el-dropdown-link {
+    cursor: pointer;
+    color:#0f4c75;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+
 </style>
 
 <script>
@@ -48,6 +65,12 @@ export default {
   name: 'home',
   data() {
     return {
+      pickerOptions: {
+         disabledDate: (time) => {
+          return this.dealDisabledDate(time)
+        }
+      },
+      value1: '',
       dataa: {
         labels: [
           "January",
@@ -82,7 +105,12 @@ export default {
   components: {
     BarChart
   },
+
   methods: {
+    dealDisabledDate (time) {
+      let day = 60 * 24 * 3600 * 1000
+      return time.getTime() > Date.now() || time.getTime() + day < Date.now()
+    },
     callApi: function () {
       var macaddr = "?macaddr=" + "aa15ec12";
       //var date_filter = "&date_filter=" + "2020-1-12 21:00:00+-+2020-1-10 18:00:00";
@@ -104,4 +132,6 @@ export default {
       }
   }
 }
+
 </script>
+
