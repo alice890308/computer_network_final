@@ -1,11 +1,24 @@
 <template>
 	<div>
+    
+    <!--h1>ICN Final Project API Example</h1>
+    <button id="test_button" @click="callApi">Call API</button-->
+
+    <!-- <h1>Example</h1>
+    <button id="test_button" @click="callApi">Call API</button> -->
     <img id="runner" src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" >
     <hr>
     <div>
       <el-tabs :tab-position="tabPosition" style="height: 710px;">
         <el-tab-pane label="Welcome">
-          <h1>Welcome</h1>
+          <div  class="introduction">
+            <h1>Welcome</h1>
+            <div>
+              <p id="text_introduction"> 追蹤使用者的活動情況是否隨著環境溫溼度改變 </p><br>
+              <p id="text_introduction"> 提供使用者檢視自己的活動程度的平台 </p><br>
+              <p id="text_introduction"> 了解自身的習慣進而促進平日活動量 </p><br>
+            </div>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="Daily Report">
           <div  class="DailyData">
@@ -120,6 +133,25 @@
   }
   #headerforday{
     color: #698474;
+  }
+  .introduction{
+    margin-top:10px; 
+    background-color:white;
+    position:relative;
+    width: 1400px;
+    height: 750px;
+
+    #text_introduction{
+      position:relative;
+      top:150px;
+      left:0px;
+      color: #8bbabb;
+      font-family:Microsoft JhengHei;
+      font-size:23px;
+      font-weight : bold;
+      letter-spacing:8px;
+      word-spacing:5px;
+    }
   }
   .DailyData{
     margin-top:10px; 
@@ -380,4 +412,3 @@ export default {
 }
 
 </script>
-
