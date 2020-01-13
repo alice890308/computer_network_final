@@ -16,7 +16,20 @@
       <h2> Temperature value: </h2>
       <p id="temperature">First Temperature value</p>
     </div>
-    <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+      <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+    <div>
+    </div>
+       <h2> Daily Result: </h2>
+    <div class="block">
+      <span class="demonstration">SeeYourDailyResult</span>
+      <el-date-picker
+        v-model="dayselect"
+        type="date"
+        :picker-options="pickerOptions"
+        value-format="yyyy-MM-dd"
+        placeholder="Choose the date">
+      </el-date-picker>
+    </div>
     <hr>
     
     <div class="bottom">
@@ -43,7 +56,7 @@
       </a>
       <p id="basic_information">TEAM 6  Introduction to Computer Networks Final Project</p>
       <i class="el-icon-user"></i>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -54,7 +67,19 @@
   #barometer {
     color:bisque;
   }
-
+  .el-dropdown-link {
+    cursor: pointer;
+    color:#0f4c75;
+  }
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
   .bottom{
     margin-top:10px; 
     background-color:#f3f3f3;
@@ -105,6 +130,12 @@ export default {
   name: 'home',
   data() {
     return {
+      pickerOptions: {
+         disabledDate: (time) => {
+          return this.dealDisabledDate(time)
+        }
+      },
+      dayselect: '',
       dataa: {
         labels: [
           "January",
@@ -139,7 +170,21 @@ export default {
   components: {
     BarChart
   },
+
   methods: {
+    handleCommandY(command) {
+      this.$message('Choose the year ' + command);
+    },
+    handleCommandM(command) {
+      this.$message('Choose the month ' + command);
+    },
+    handleCommandD(command) {
+      this.$message('Choose the day ' + command);
+    },
+    dealDisabledDate (time) {
+      let day = 60 * 24 * 3600 * 1000
+      return time.getTime() > Date.now() || time.getTime() + day < Date.now()
+    },
     callApi: function () {
       var macaddr = "?macaddr=" + "aa15ec12";
       //var date_filter = "&date_filter=" + "2020-1-12 21:00:00+-+2020-1-10 18:00:00";
@@ -161,4 +206,6 @@ export default {
       }
   }
 }
+
 </script>
+
