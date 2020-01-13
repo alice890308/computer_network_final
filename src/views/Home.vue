@@ -16,19 +16,105 @@
     </div>
       <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
     <div>
-      <el-dropdown>
+    </div>
+       <h2> Daily Result: </h2>
+    <div>
+      <el-dropdown @command="handleCommandY">
         <span class="el-dropdown-link">
           year<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item disabled>2018</el-dropdown-item>
-          <el-dropdown-item>2019</el-dropdown-item>
-          <el-dropdown-item>2020</el-dropdown-item>
+          <el-dropdown-item command="2019">2019</el-dropdown-item>
+          <el-dropdown-item command="2020">2020</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-dropdown @command="handleCommandM">
+        <span class="el-dropdown-link">
+          month<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="Jan.">1</el-dropdown-item>
+          <el-dropdown-item command="Feb.">2</el-dropdown-item>
+          <el-dropdown-item command="Mar.">3</el-dropdown-item>
+          <el-dropdown-item command="Apr.">4</el-dropdown-item>
+          <el-dropdown-item command="May.">5</el-dropdown-item>
+          <el-dropdown-item command="Jun.">6</el-dropdown-item>
+          <el-dropdown-item command="Jul.">7</el-dropdown-item>
+          <el-dropdown-item command="Agu.">8</el-dropdown-item>
+          <el-dropdown-item command="Sep.">9</el-dropdown-item>
+          <el-dropdown-item command="Oct.">10</el-dropdown-item>
+          <el-dropdown-item command="Nov.">11</el-dropdown-item>
+          <el-dropdown-item command="Dec.">12</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-dropdown @command="handleCommandD">
+        <span class="el-dropdown-link">
+          day<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="1">1</el-dropdown-item>
+          <el-dropdown-item command="2">2</el-dropdown-item>
+          <el-dropdown-item command="3">3</el-dropdown-item>
+          <el-dropdown-item command="4">4</el-dropdown-item>
+          <el-dropdown-item command="5">5</el-dropdown-item>
+          <el-dropdown-item command="6">6</el-dropdown-item>
+          <el-dropdown-item command="7">7</el-dropdown-item>
+          <el-dropdown-item command="8">8</el-dropdown-item>
+          <el-dropdown-item command="9">9</el-dropdown-item>
+          <el-dropdown-item command="10">10</el-dropdown-item>
+          <el-dropdown-item command="11">11</el-dropdown-item>
+          <el-dropdown-item command="12">12</el-dropdown-item>
+          <el-dropdown-item command="13">13</el-dropdown-item>
+          <el-dropdown-item command="14">14</el-dropdown-item>
+          <el-dropdown-item command="15">15</el-dropdown-item>
+          <el-dropdown-item command="16">16</el-dropdown-item>
+          <el-dropdown-item command="17">17</el-dropdown-item>
+          <el-dropdown-item command="18">18</el-dropdown-item>
+          <el-dropdown-item command="19">19</el-dropdown-item>
+          <el-dropdown-item command="20">20</el-dropdown-item>
+          <el-dropdown-item command="21">21</el-dropdown-item>
+          <el-dropdown-item command="22">22</el-dropdown-item>
+          <el-dropdown-item command="23">23</el-dropdown-item>
+          <el-dropdown-item command="24">24</el-dropdown-item>
+          <el-dropdown-item command="25">25</el-dropdown-item>
+          <el-dropdown-item command="26">26</el-dropdown-item>
+          <el-dropdown-item command="27">27</el-dropdown-item>
+          <el-dropdown-item command="28">28</el-dropdown-item>
+          <el-dropdown-item command="29">29</el-dropdown-item>
+          <el-dropdown-item command="30">30</el-dropdown-item>
+          <el-dropdown-item command="31">31</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <div>
+      <el-select v-model="valuey" clearable placeholder="year">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <el-select v-model="valuem" style="margin-left: 20px;" clearable placeholder="month">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+      <el-select v-model="valued" style="margin-left: 20px;" clearable placeholder="day">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    </div>
     <div class="block">
-      <span class="demonstration">GetWhatYouWant</span>
+      <span class="demonstration">SeeYourResult</span>
       <el-date-picker
         v-model="value1"
         type="date"
@@ -51,9 +137,16 @@
     cursor: pointer;
     color:#0f4c75;
   }
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
   .el-icon-arrow-down {
     font-size: 12px;
   }
+  
 
 </style>
 
@@ -65,6 +158,16 @@ export default {
   name: 'home',
   data() {
     return {
+      options: [{
+        value: 'year1',
+        label: '2019'
+       }, {
+        value: 'year2',
+        label: '2020'
+      }],
+      valuey: [],
+      valuem: [],
+      valued: [],
       pickerOptions: {
          disabledDate: (time) => {
           return this.dealDisabledDate(time)
@@ -107,6 +210,15 @@ export default {
   },
 
   methods: {
+    handleCommandY(command) {
+      this.$message('Choose the year ' + command);
+    },
+    handleCommandM(command) {
+      this.$message('Choose the month ' + command);
+    },
+    handleCommandD(command) {
+      this.$message('Choose the day ' + command);
+    },
     dealDisabledDate (time) {
       let day = 60 * 24 * 3600 * 1000
       return time.getTime() > Date.now() || time.getTime() + day < Date.now()
