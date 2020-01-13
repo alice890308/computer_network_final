@@ -96,31 +96,38 @@
   }
   .block{
   }
-  #barometerforday{
-    color: #8ac6d1;
-  }
-  #humidityforday{
-    color: #8ac6d1;
-  }
-  #temperatureforday{
-    color: #8ac6d1;
-  }
   #headerforday{
     color: #698474;
   }
-  #titlebarometerforday{
-    color: #2c7873;
-  }
-  #titlehumidityforday{
-    color: #2c7873;
-  }
-  #titletemperatureforday{
-    color: #2c7873;
-  }
-  #TotalHour{
-    //position: relative;
-    margin-right: 1000px;
-    color: #698474;
+  .OneDayData{
+    margin-top:10px; 
+    position:relative;
+    width: 1650px;
+    height: 300px;
+    #barometerforday{
+    color: #8ac6d1;
+    }
+    #humidityforday{
+      color: #8ac6d1;
+    }
+    #temperatureforday{
+      color: #8ac6d1;
+    }
+    
+    #titlebarometerforday{
+      color: #2c7873;
+    }
+    #titlehumidityforday{
+      color: #2c7873;
+    }
+    #titletemperatureforday{
+      color: #2c7873;
+    }
+    #TotalHour{
+      //position: relative;
+      margin-right: 1000px;
+      color: #698474;
+    }
   }
   
   .bottom{
