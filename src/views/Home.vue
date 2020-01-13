@@ -1,13 +1,6 @@
 <template>
 	<div>
-
-    <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" width="1550" height="800">
-    <!--h1>ICN Final Project API Example</h1>
-    <button id="test_button" @click="callApi">Call API</button-->
-
-    <!-- <h1>Example</h1>
-    <button id="test_button" @click="callApi">Call API</button> -->
-    
+    <img id="runner" src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" >
     <hr>
     <div>
       <el-tabs :tab-position="tabPosition" style="height: 710px;">
@@ -48,14 +41,6 @@
         </el-tab-pane>
         <el-tab-pane label="Weekly Report">
           <h1>Weekly Report</h1>
-          <!-- <div>
-            <h2> Humudity value: </h2>
-            <p id="humidity">First Humudity value</p>
-          </div>
-          <div>
-            <h2> Temperature value: </h2>
-            <p id="temperature">First Temperature value</p>
-          </div> -->
           <div class="SelectWeek">
             <el-select v-model="value" placeholder="--SelectWeek--">
               <el-option
@@ -67,10 +52,10 @@
             </el-select>
           </div>
         </el-tab-pane>
-        <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+        <button id="test_button" @click="callApi">Call API</button>
+        <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="shouldRender" @completeRender="completeRender" />
       </el-tabs>
     </div>
-    
     <hr>
     <div class="bottom">
       <p id="social_media">get in touch</p>
@@ -101,6 +86,10 @@
 </template>
 
 <style lang="scss" scoped>
+  #runner {
+    width: 100vw;
+    height: 100vh;
+  }
   p {
     color:aquamarine;
   }
@@ -135,7 +124,7 @@
   .DailyData{
     margin-top:10px; 
     background-color:white;
-    osition:relative;
+    position:relative;
     width: 1400px;
     height: 750px;
 
@@ -260,6 +249,10 @@ export default {
   name: 'home',
   data() {
     return {
+      shouldRender: false,
+      weekdata: {},
+      all_data: {},
+      week_selected: "0105010601070108010901100111",
       pickerOptions: {
          disabledDate: (time) => {
           return this.dealDisabledDate(time)
@@ -267,31 +260,6 @@ export default {
       },
       dayselect: '',
       tabPosition: 'right',
-      dataa: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: "#fed39f",
-            borderWidth: 4,
-            borderSkipped: false,
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-          }
-        ]
-      },
       chartoptions: {
         responsive: true,
         maintainAspectRatio: false
@@ -326,29 +294,88 @@ export default {
   },
 
   methods: {
+    completeRender() {
+      this.shouldRender = false;
+    },
     dealDisabledDate (time) {
       let day = 60 * 24 * 3600 * 1000
       return time.getTime() > Date.now() || time.getTime() + day < Date.now()
     },
     callApi: function () {
       var macaddr = "?macaddr=" + "aa15ec12";
-      //var date_filter = "&date_filter=" + "2020-1-12 21:00:00+-+2020-1-10 18:00:00";
+      //var date_filter = "&date_filter=" + "2019-12-8 00:00:00+-+2020-1-13 15:54:00";
       axios.post("https://campus.kits.tw/ICN_API" + macaddr/* + date_filter*/, 
                   null,
                   { headers: {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImMzMDU5NTFjZGJmNGQ4MDM4M2IxOTA5MDhlNzBlOGZmMzA2Y2RkNjhhOWZhNTY1MWFlZTA0NzNkMTEwYTgwN2Y2MTgwMGZiMGI3NDhhZjdmIn0.eyJhdWQiOiIyIiwianRpIjoiYzMwNTk1MWNkYmY0ZDgwMzgzYjE5MDkwOGU3MGU4ZmYzMDZjZGQ2OGE5ZmE1NjUxYWVlMDQ3M2QxMTBhODA3ZjYxODAwZmIwYjc0OGFmN2YiLCJpYXQiOjE1NzYxNTkxMzEsIm5iZiI6MTU3NjE1OTEzMSwiZXhwIjoxNjA3NzgxNTMxLCJzdWIiOiIyNTIiLCJzY29wZXMiOltdfQ.hDDzk7StTJ0czRT8vHPJoQYxhTpbrr2auYdXyewXFW6yYtBdZFpRshsrRfLbX4pNXhQq_Q1orEe7gO0w_3HukCwWvXf0ajNL-Zvmuay5wcbiIYTaL_-w7nWtTshUVnOw2lX6DKHdxY1Q17nJvK0o39leChMAeIc88Oabx3gCprny983kA4LDwyPd3S5_Eu8J7i5giuR_ul3PF37W5Z2ymNRR3RBZaJkV2IEQAsHhiMmuNpjcKZXvU3zegS6Q-2dviNQsKWYnrSN8rMeq5xljDaOzCR-ueWDuDgmpYOo_nGqQusRJbLGdPy9BGs0_pWgb-yD2e4Fu34fBzg_CLaffSFaKxFEoz12GHwGfczu2NeVH69jp8vvuAzRBfo1Gm8PboBhm07MX3jlXhTM-P6IX4GxjfDcZFFVO7gygOJ6GRRM_1WtvB9XmEu2mA-AJ_BC08GU0JKx_qLo3N17WwnxPoaqNrqJ-v8RwBRBAfyVmUqh7nbJTLw4SnUYkoyjV6KX_RGIcT8Ovr4upyoDmYgnKwxy1Tsh3yMVgg7jGTMw_3IxgOdxcIn2H6pWQCYUqhp8NJuzvhDAz7XdwbAeJuYr6LwX-3Ei1KWHD04kzI8GZmfwmvPMxQGgLEkMVc028YM2cFPYtuGBRFxcxw3vmTB1dR7kAQ1W4u_ksfk415Ri6NQ4', 
                                                       'Accept': 'application/json'}
       })
-        .then((data) => {
-           console.log(data);
-        })
-        .catch((err) => {
-          if (err.status === '200') {
-            alert('API calling error: macaddr or url format error!')
-          } else {
-            alert('API is sleeping !')
+      .then((response) => {
+          console.log(response);
+          /* 會用到的變數 */
+          var count = 0;
+          var data_num = response["data"]["length"]
+          var cur_date = response["data"][0]["created_at"].substring(5, 10)
+          console.log(cur_date)
+          var all_shaking_count = {}
+
+          for(var i  = 0; i < data_num; i++) {
+            var acc_x = response["data"][i]["acc_x"]
+            var acc_y = response["data"][i]["acc_y"]
+            var acc_z = response["data"][i]["acc_z"]
+
+            /* 若是當前進來的資料時間與前一個不同，表示已經是下一天了 */
+            if (response["data"][i]["created_at"].substring(5, 10) != cur_date) {
+              all_shaking_count[cur_date] = count
+              count = 0
+              cur_date = response["data"][i]["created_at"].substring(5, 10)
+            }
+
+            /* 如果有震動，count++ */
+            if (acc_x != null || acc_y != null || acc_z != null){
+              count++;
+            }
           }
-        })
+          all_shaking_count[cur_date] = count
+          this.all_data = all_shaking_count
+          //console.log(this.all_data)
+          this.weekBarChartData()
+      })
+      .catch((err) => {
+        if (err.status === '200') {
+          alert('API calling error: macaddr or url format error!')
+        } else {
+          alert(err)
+        }
+      })
+    },
+    weekBarChartData: function() {
+      var label = []
+      var data = []
+      for(var i = 0; i < 7; i++)
+      {
+        var cur_date = this.week_selected.substring(i*4, i*4+2) + "-" + this.week_selected.substring(i*4+2, i*4+4)
+        /* 抓要畫的日期 */
+        label.push(cur_date)
+
+        /* 抓要畫的震動資料 */
+        if (this.all_data.hasOwnProperty(cur_date)) {
+          data.push(this.all_data[cur_date])
+        } else {
+          data.push(0)
+        }
       }
+
+      /* 把資料丟給weekdata */
+      this.weekdata["labels"] = label
+      this.weekdata["datasets"] = [{
+        label: "Weekly Analysis",
+        backgroundColor: "#3282b8",
+        data: data
+      }]
+      console.log(this.weekdata)
+      /*要再重新畫一次圖*/
+      this.shouldRender = true
+    },
   }
 }
 
