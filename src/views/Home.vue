@@ -90,7 +90,7 @@
     <div>
       <el-select v-model="valuey" clearable placeholder="year">
         <el-option
-          v-for="item in options"
+          v-for="item in optiony"
           :key="item.value"
           :label="item.label"
           :value="item.value">
@@ -98,7 +98,7 @@
       </el-select>
       <el-select v-model="valuem" style="margin-left: 20px;" clearable placeholder="month">
         <el-option
-          v-for="item in options"
+          v-for="item in optionm"
           :key="item.value"
           :label="item.label"
           :value="item.value">
@@ -106,7 +106,7 @@
       </el-select>
       <el-select v-model="valued" style="margin-left: 20px;" clearable placeholder="day">
         <el-option
-          v-for="item in options"
+          v-for="item in optiond"
           :key="item.value"
           :label="item.label"
           :value="item.value">
@@ -158,7 +158,7 @@ export default {
   name: 'home',
   data() {
     return {
-      options: [{
+      optiony: [{
         value: 'year1',
         label: '2019'
        }, {
@@ -166,7 +166,138 @@ export default {
         label: '2020'
       }],
       valuey: [],
+      optionm: [{
+        value: 'month1',
+        label: '1'
+       }, {
+        value: 'month2',
+        label: '2'
+       }, {
+        value: 'month3',
+        label: '3'
+       }, {
+        value: 'month4',
+        label: '4'
+       },{
+        value: 'month5',
+        label: '5'
+       },{
+        value: 'month6',
+        label: '6'
+       },{
+        value: 'month7',
+        label: '7'
+       },{
+        value: 'month8',
+        label: '8'
+       },{
+        value: 'month9',
+        label: '9'
+       },{
+        value: 'month10',
+        label: '10'
+       },{
+        value: 'month11',
+        label: '11'
+       },{
+        value: 'month12',
+        label: '12'
+       }],
       valuem: [],
+      optiond: [{
+        value: 'day1',
+        label: '1'
+       }, {
+        value: 'day2',
+        label: '2'
+       }, {
+        value: 'day3',
+        label: '3'
+       }, {
+        value: 'day4',
+        label: '4'
+       },{
+        value: 'day5',
+        label: '5'
+       },{
+        value: 'day6',
+        label: '6'
+       },{
+        value: 'day7',
+        label: '7'
+       },{
+        value: 'day8',
+        label: '8'
+       },{
+        value: 'day9',
+        label: '9'
+       },{
+        value: 'day10',
+        label: '10'
+       },{
+        value: 'day11',
+        label: '11'
+       },{
+        value: 'day12',
+        label: '12'
+       },{
+        value: 'day13',
+        label: '13'
+       }, {
+        value: 'day14',
+        label: '14'
+       }, {
+        value: 'day15',
+        label: '15'
+       }, {
+        value: 'day16',
+        label: '16'
+       },{
+        value: 'day17',
+        label: '17'
+       },{
+        value: 'day18',
+        label: '18'
+       },{
+        value: 'day19',
+        label: '19'
+       },{
+        value: 'day20',
+        label: '20'
+       },{
+        value: 'day21',
+        label: '21'
+       },{
+        value: 'day22',
+        label: '22'
+       },{
+        value: 'day23',
+        label: '23'
+       },{
+        value: 'day24',
+        label: '24'
+       },{
+        value: 'day25',
+        label: '25'
+       }, {
+        value: 'day26',
+        label: '26'
+       }, {
+        value: 'day27',
+        label: '27'
+       }, {
+        value: 'day28',
+        label: '28'
+       },{
+        value: 'day29',
+        label: '29'
+       },{
+        value: 'day30',
+        label: '30'
+       },{
+        value: 'day31',
+        label: '31'
+       }],
       valued: [],
       pickerOptions: {
          disabledDate: (time) => {
