@@ -1,50 +1,72 @@
 <template>
 	<div>
+
     <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" width="1550" height="800">
     <h1>ICN Final Project API Example</h1>
-    <h1>Example</h1>
     <button id="test_button" @click="callApi">Call API</button>
+
+    <!-- <h1>Example</h1>
+    <button id="test_button" @click="callApi">Call API</button> -->
+    
+
     <div>
-      <h2> Barometer value: </h2>
-      <p id="barometer">First Barometer value</p>
+      <el-tabs :tab-position="tabPosition" style="height: 600px;">
+        <el-tab-pane label="Welcome">
+          <h1>Welcome</h1>
+        </el-tab-pane>
+        <el-tab-pane label="Daily Report">
+          <div  class="DailyData">
+            <h1>Daily Report</h1>
+            <div class="block">
+              <span class="demonstration">SeeYourDailyResult</span>
+              <el-date-picker
+                v-model="dayselect"
+                type="date"
+                :picker-options="pickerOptions"
+                value-format="yyyy-MM-dd"
+                placeholder="Choose the date">
+              </el-date-picker>
+            </div>
+            <div>
+              <h2 id="TotalHour">Pass 4 weeks</h2> 
+              <h2 id="titlebarometerforday"> Barometer value: </h2>
+              <p id="barometerforday">First Barometer value</p>
+            </div>
+            <div>
+              <h2 id="titlehumidityforday"> Humudity value: </h2>
+              <p id="humidityforday">First Humudity value</p>
+            </div>
+            <div>
+              <h2 id="titletemperatureforday"> Temperature value: </h2>
+              <p id="temperatureforday">First Temperature value</p>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="Weekly Report">
+          <h1>Weekly Report</h1>
+          <!-- <div>
+            <h2> Humudity value: </h2>
+            <p id="humidity">First Humudity value</p>
+          </div>
+          <div>
+            <h2> Temperature value: </h2>
+            <p id="temperature">First Temperature value</p>
+          </div> -->
+          <div class="SelectWeek">
+            <el-select v-model="value" placeholder="--SelectWeek--">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+        </el-tab-pane>
+        <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+      </el-tabs>
     </div>
-    <div>
-      <h2> Humudity value: </h2>
-      <p id="humidity">First Humudity value</p>
-    </div>
-    <div>
-      <h2> Temperature value: </h2>
-      <p id="temperature">First Temperature value</p>
-    </div>
-      <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
-    <div>
-    </div>
-    <h1 id = "headerforday"> Daily Result: </h1>
-    <div class="block">
-      <span class="demonstration">SeeYourDailyResult</span>
-      <el-date-picker @command="handleCommand"
-        v-model="dayselect"
-        type="date"
-        :picker-options="pickerOptions"
-        value-format="yyyy-MM-dd"
-        placeholder="Choose the date">
-      </el-date-picker>
-    </div>
-    <div class="OneDayData">
-      <div>
-        <h2 id="TotalHour">Pass 4 weeks</h2> 
-        <h2 id="titlebarometerforday"> Barometer value: </h2>
-        <p id="barometerforday">First Barometer value</p>
-      </div>
-      <div>
-        <h2 id="titlehumidityforday"> Humudity value: </h2>
-        <p id="humidityforday">First Humudity value</p>
-      </div>
-      <div>
-        <h2 id="titletemperatureforday"> Temperature value: </h2>
-        <p id="temperatureforday">First Temperature value</p>
-      </div>
-    </div>
+    
     <hr>
     <div class="bottom">
       <p id="social_media">get in touch</p>
@@ -99,11 +121,13 @@
   #headerforday{
     color: #698474;
   }
-  .OneDayData{
-    margin-top:10px; 
-    position:relative;
-    width: 1650px;
-    height: 300px;
+  .DailyData{
+    //margin-top:10px; 
+    background-color:white;
+    //osition:relative;
+    width: 1400px;
+    height: 700px;
+
     #barometerforday{
     color: #8ac6d1;
     }
@@ -113,7 +137,6 @@
     #temperatureforday{
       color: #8ac6d1;
     }
-    
     #titlebarometerforday{
       color: #2c7873;
     }
@@ -124,17 +147,33 @@
       color: #2c7873;
     }
     #TotalHour{
-      //position: relative;
-      margin-right: 1000px;
+      position:relative;
+      top:0px;
+      left:-35px;
       color: #698474;
     }
   }
-  
+  .SelectWeek{
+    margin-top:0px; 
+    margin-left: -800px;
+    background-color:white;
+    position:relative;
+    // width: 1650px; // selectweek block's height (count from title's head)
+    // height: 220px;
+    #title{
+      color : #be8abf;
+      font-size : 20px;
+      font-family : Microsoft JhengHei;
+      font-weight : bold;
+      letter-spacing:8px;
+      word-spacing:5px;
+    }
+  }
   .bottom{
     margin-top:10px; 
     background-color:#f3f3f3;
     position:relative;
-    width: 1650px;
+    width: 1550px;
     height: 220px;
     #social_media{
       color : #be8abf;
@@ -186,6 +225,7 @@ export default {
         }
       },
       dayselect: '',
+      tabPosition: 'right',
       dataa: {
         labels: [
           "January",
@@ -214,7 +254,21 @@ export default {
       chartoptions: {
         responsive: true,
         maintainAspectRatio: false
-      }
+      },
+      options: [{
+        value: '191201-191207',
+        label: '191201-191207'
+      }, {
+        value: '191208-191214',
+        label: '191208-191214'
+      }, {
+        value: '191215-191223',
+        label: '191215-191223'
+      }, {
+        value: '191222-191231',
+        label: '191222-191231'
+      }],
+      value: ''
     }
   },
   components: {
