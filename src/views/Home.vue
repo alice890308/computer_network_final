@@ -1,6 +1,5 @@
 <template>
 	<div>
-
     <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" width="1550" height="800">
     <!--h1>ICN Final Project API Example</h1>
     <button id="test_button" @click="callApi">Call API</button-->
@@ -70,7 +69,10 @@
         <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
       </el-tabs>
     </div>
-    
+    <h1 class="ml15">
+      <span class="word">Out</span>
+      <span class="word">now</span>
+    </h1>
     <hr>
     <div class="bottom">
       <p id="social_media">get in touch</p>
@@ -101,6 +103,17 @@
 </template>
 
 <style lang="scss" scoped>
+  .ml15 {
+    font-weight: 800;
+    font-size: 3.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+  }
+
+  .ml15 .word {
+    display: inline-block;
+    line-height: 1em;
+  }
   p {
     color:aquamarine;
   }
@@ -251,7 +264,7 @@
 
 </style>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>
 import BarChart from "../components/BarChart.vue";
 import axios from 'axios'
@@ -324,7 +337,27 @@ export default {
   components: {
     BarChart
   },
-
+  async mounted() {
+    try {
+      await anime.timeline({loop: true})
+      .add({
+        targets: '.ml15 .word',
+        scale: [14,1],
+        opacity: [0,1],
+        easing: "easeOutCirc",
+        duration: 800,
+        delay: (el, i) => 800 * i
+      }).add({
+        targets: '.ml15',
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+      })
+    } catch(err) {
+      console.eerror('[error]')
+    }
+  },
   methods: {
     dealDisabledDate (time) {
       let day = 60 * 24 * 3600 * 1000
