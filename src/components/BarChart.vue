@@ -1,10 +1,8 @@
 <script>
-import { Bar, mixins } from "vue-chartjs";
-const { reactiveProp } = mixins
+import { Bar } from "vue-chartjs";
 
 export default {
   extends: Bar,
-  mixins: [reactiveProp],
   props: {
     dataset: {
       type: Object,
@@ -13,15 +11,20 @@ export default {
     chartoptions: {
       type: Object,
       default: null
+    },
+    shouldRender: {
+      type: Boolean,
+      default: false
+    }
+  },
+  watch: {
+    shouldRender() {
+      this.renderChart(this.dataset, this.chartoptions);
+      if (this.shouldRender) this.$emit('completeRender');
     }
   },
   mounted() {
     this.renderChart(this.dataset, this.chartoptions);
-  },
-  watch: {
-     dataset: function () {
-       this.renderChart(this.dataset, this.chartoptions);
-    }
-  },
+  }
 };
 </script>
