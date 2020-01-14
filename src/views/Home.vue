@@ -6,13 +6,19 @@
 
     <!-- <h1>Example</h1>
     <button id="test_button" @click="callApi">Call API</button> -->
-    <img id="runner" src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" >
+    <div>
+      <div id="runnerdiv" ><img id="runner" src="https://scontent-hkg3-2.xx.fbcdn.net/v/t1.0-9/s960x960/82005295_2437665073022914_8857725493667954688_o.jpg?_nc_cat=111&_nc_ohc=3x5X6GOx6eoAX_yMB6Z&_nc_ht=scontent-hkg3-2.xx&_nc_tp=1&oh=f192c2413613689b42ad04a8bd749b05&oe=5EA24E40" ></div>
+      <div class="animation2">Keep on going.</div> 
+      <div class="animation3"> 
+        <span id="animation2s">never give up.</span>
+      </div>
+    </div>
     <hr>
     <div>
       <el-tabs :tab-position="tabPosition" style="height: 710px;">
         <el-tab-pane label="Welcome">
           <div  class="introduction">
-            <h1>Welcome</h1>
+            <h1 id="animation">Welcome</h1>
             <div>
               <p id="text_introduction"> 追蹤使用者的活動情況是否隨著環境溫溼度改變 </p><br>
               <p id="text_introduction"> 提供使用者檢視自己的活動程度的平台 </p><br>
@@ -22,7 +28,7 @@
         </el-tab-pane>
         <el-tab-pane label="Daily Report">
           <div  class="DailyData">
-            <h1>Daily Report</h1>
+            <h1 id="animation">Daily Report</h1>
             <div class="block">
               <span class="demonstration">SeeYourDailyResult</span>
               <el-date-picker
@@ -34,7 +40,7 @@
               </el-date-picker>
             </div>
             <div>
-              <h2 id="TotalHour">Pass 2 months</h2> 
+              <h2 id="TotalHour">Past 2 months</h2> 
               <div class="wrapper">
                 <div class="letters">
                   <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
@@ -61,7 +67,7 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="Weekly Report">
-          <h1>Weekly Report</h1>
+          <h1 id="animation">Weekly Report</h1>
           <div class="SelectWeek">
             <el-select v-model="value" placeholder="--SelectWeek--">
               <el-option
@@ -80,7 +86,7 @@
     <hr>
     <div class="bottom">
       <p id="social_media">get in touch</p>
-      <a href="https://www.facebook.com/" target="_blank">
+      <a href="https://www.facebook.com/rainbow1314520" target="_blank">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAb1BMVEVCZ7L///+5w95GarM2YK80Xq+pttc+ZbFfe7s6YrCHmsmZqdA8Y7Ds8PdSdLlffr3V3OyQpNFrh8Lg5vIvW633+fyCmsxKb7fG0eier9WtutnAy+Ta4e91jsR8k8eMn8zP1ulvh8Dx9PkmVqvo7ff2SOu1AAAEYklEQVR4nO3da3uqOBSG4YDBmDYkHEStp1qn//83jqfuvWemoxGarBWu9/myP9XNfS0sIJGK7FpZ1Y0VY8k2dVXeZOL6T+6kNtTb9YMZLV3+h7B1cky8a0a69ktYWU29OUHStroKWzu+AV4ztr0I3TgneE67szCX1NsRMJlnonRj3UfPGVeKaswjPA2xEvV434XndC2aMe+kp920EeM5Vfu+sfsQQgghhBBCCCGEEPJJKWOM1lpKfc5cUkoo6g37mbQshG12+8XLe/1+6mWx3+8+GjezSyXnRXESq1SpyuhiPlmsq21bHrvudrc667ruWJafn227rQ6b9euisUWStySUFM3r6pfrfq/pEc18Oa2OfryzMLW7Lnry4Tu9JGeoin31DC+1GSrjDk/NL7UZmsn0aV9SM5R2+7wvoRmq4q3HABMSnoC9fMnspWqy6glMZIbKbPoCU5lhf2AaMyym/YFJzFDXA4ApzNA0/qfZSc5QyWfPRFOboR7yJkxBaNygfTSBvXTe+1CfyAyNGwjkPkOlhv2a4T9Ds+t3QZHODE0+FMh8hmo5eITMZygHna+lMEPZ63OLhITGlY8FD4Wc91LZ95OLfwgZz1ANufD9LWQ8Q2U/f0LIeIZm9gSk267y9Xo9/XfrD8bfFtELX95xs58tJ0rLb2IMFIXnCU05nRQmyRvbc7+jYTXTCeIuSa9r343ivB/eb+kjLJfpAk3jc9q9Y3wweJTZewhXyS4nEZ4XFu8Jj1Do18fA0iY8Qq/z7kNBvZVD8rkfM01aKNceb0PGFw6P8zlpS/tL2D7C2eiFSf8q9RIuqTdyUD7CCfVGDgpCCPkHIYT8gxBC/kEIIf8ghJB/EELIv1EI1Xc33r/6y0NoinuvcIr4E2Pl/rt24o88bnLf+/FLb7RE/fLYMLDP+diFK9pbNxGEa9o7qBGExKvaIghfxi7sdrQ3p8ILqR9FHl7YEt9+Cy+sJmMXHoiX24QX5sRrNcIL30Y/wz3xSobwQuq/WxFeSOuLIOxor50iCNvRCzfUC/uCC8mXLgYX1tQriIMLqQ+HwYUd+eLM0MLSUS9dDC3cki/ODC08EF8dhhduqN+GwYXEH5ZGENJ/BTiwsCM/HAYXkh8OQwuP9OvcQwupz7uDC7fUV4cn4XtQIfG9w3Nq6Wb/n/V4ZsS9n59x+LuG6l5zj5UKwtx5AWrdw0ax2uRuEELIPwgh5B+EEPIPQgj5ByGE/IMQQv5BCCH/IISQfxBCyD8IIeQfhBDyD0II+QchhPyDEEL+QQgh/yCEkH8QQsg/CCHkH4QQ8g9CCPkHIYT8gxBC/kEIIf8g/EEh0bMJogmtIHrMSyyhaURN8zCiWEJdi4rmgVKxhLISRA82jyQ0rhRZTjLESEKZZyLrHMU7MY5Qu+wkzFpLsJ9GERrbXoRZZeNPMYZQ2yq7CrPWydhjDC800rXZlzDrcid1VGRgodHS3f4HcXu1sqqbmCdwYYW2qavy9ip/A3YKUMidEST2AAAAAElFTkSuQmCC" 
             style="width:40px; height:40px; position:relative; top:55px; left:-390px; opacity:0.85">
       </a>
@@ -96,17 +102,55 @@
       <img src="https://scontent-hkg3-2.xx.fbcdn.net/v/t1.0-9/82462718_2435324336590321_1128723538602098688_n.jpg?_nc_cat=110&_nc_ohc=sAIY3T1-1ugAX_-j-E4&_nc_ht=scontent-hkg3-2.xx&oh=f2bf54eacd272fd13c83b95a8f1ff343&oe=5E914500" 
                 style="width:45px; height:45px; position:relative; top:60px; left:135px; opacity:0.85">
       </a>
-      <a href="https://line.me/ti/p/HaSxFBGIDj" target="_blank">
+      <a href="https://line.me/ti/p/22LTsrXsab" target="_blank">
       <img src="data:image/png;base64,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" 
                 style="width:43px; height:43px; position:relative; top:60px; left:330px; opacity:0.85">
       </a>
       <p id="basic_information">TEAM 6  Introduction to Computer Networks Final Project</p>
       <i class="el-icon-user"></i>
-      </div>
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
+    // body {
+    //   margin: 0;
+    //   padding: 0;
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   height: 100vh;
+    //   background-color: #000;
+    // }
+
+    #animation {
+      position: relative;
+      font-family: Microsoft JhengHei;
+      text-transform: uppercase;
+      font-size: 2em;
+      letter-spacing: 4px;
+      overflow: hidden;
+      background: linear-gradient(90deg, #000, #fff, #000);
+      background-repeat: no-repeat;
+      background-size: 80%;
+      animation: animate 6s linear infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    }
+
+    @keyframes animate {
+      0% {
+        background-position: -500%;
+      }
+      100% {
+        background-position: 500%;
+      }
+    }
+
+  #runnerdiv{
+    z-index: 1;
+  }
+
   #runner {
     width: 100vw;
     height: 100vh;
@@ -570,6 +614,95 @@
     }
   }
 
+  @import url('https://fonts.googleapis.com/css?family=Roboto:300');
+  .animation2{
+      display:inline-block;
+      white-space:nowrap;
+      text-align:center;
+      color:#f4f4f4;
+      font-family:'Roboto';
+      font-weight : bold;
+      font-size:35px;
+      letter-spacing:10px;
+      word-spacing:5px;
+
+      overflow:hidden;
+      -webkit-backface-visibility: hidden;
+      -webkit-perspective: 1000;
+      -webkit-transform: translate3d(0,0,0);
+      opacity:0;
+      z-index:10;
+      position: relative;
+      top:-300px;
+      left: -180px;
+    animation: showup 7s infinite;
+    @keyframes showup {
+        0% {opacity:0;}
+        20% {opacity:1;}
+        80% {opacity:1;}
+        100% {opacity:0;}
+    }
+    @keyframes slidein {
+        0% { margin-left:-800px; }
+        20% { margin-left:-800px; }
+        35% { margin-left:0px; }
+        100% { margin-left:0px; }
+    }
+    @keyframes reveal {
+        0% {opacity:0;width:0px;}
+        20% {opacity:1;width:0px;}
+        30% {width:355px;}
+        80% {opacity:1;}
+        100% {opacity:0;width:355px;}
+    }    
+  }
+
+  .animation3{
+      text-align:center;
+      color:#f4f4f4;
+      font-family:'Roboto';
+      font-weight : bold;
+      font-size:35px;
+      letter-spacing:10px;
+      word-spacing:5px;
+
+      overflow:hidden;
+      -webkit-backface-visibility: hidden;
+      -webkit-perspective: 1000;
+      -webkit-transform: translate3d(0,0,0);
+      display:inline-block;
+
+      white-space:nowrap;
+      width:0px;
+      animation: reveal 7s infinite;
+      z-index:20;
+      position: relative;
+      top: -300px;
+      left: -300px;
+    #animation2s{
+        margin-left:-355px;
+        animation: slidein 7s infinite;
+    }
+    @keyframes showup {
+        0% {opacity:0;}
+        20% {opacity:1;}
+        80% {opacity:1;}
+        100% {opacity:0;}
+    }
+    @keyframes slidein {
+        0% { margin-left:-800px; }
+        20% { margin-left:-800px; }
+        35% { margin-left:0px; }
+        100% { margin-left:0px; }
+    }
+    @keyframes reveal {
+        0% {opacity:0;width:0px;}
+        20% {opacity:1;width:0px;}
+        30% {width:655px;}
+        80% {opacity:1;}
+        100% {opacity:0;width:655px;}
+    } 
+  }
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
