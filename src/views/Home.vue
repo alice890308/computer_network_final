@@ -1,11 +1,5 @@
 <template>
 	<div>
-    
-    <!--h1>ICN Final Project API Example</h1>
-    <button id="test_button" @click="callApi">Call API</button-->
-
-    <!-- <h1>Example</h1>
-    <button id="test_button" @click="callApi">Call API</button> -->
     <div>
       <div id="runnerdiv" ><img id="runner" src="https://scontent-hkg3-2.xx.fbcdn.net/v/t1.0-9/s960x960/82005295_2437665073022914_8857725493667954688_o.jpg?_nc_cat=111&_nc_ohc=3x5X6GOx6eoAX_yMB6Z&_nc_ht=scontent-hkg3-2.xx&_nc_tp=1&oh=f192c2413613689b42ad04a8bd749b05&oe=5EA24E40" ></div>
       <div class="animation2">Keep on going.</div> 
@@ -64,19 +58,19 @@
                 <!--p>Generate Random Text Transformation Using CSS Only</p-->
             </div>
               <h2 id="titlebarometerforday"> Barometer value: </h2>
-              <p id="barometerforday">First Barometer value</p>
+              <p id="barometerforday">{{ day_barometer }}</p>
             </div>
             <div>
               <h2 id="titlehumidityforday"> Humudity value: </h2>
-              <p id="humidityforday">First Humudity value</p>
+              <p id="humidityforday">{{ day_humidity }}</p>
             </div>
             <div>
               <h2 id="titletemperatureforday"> Temperature value: </h2>
-              <p id="temperatureforday">First Temperature value</p>
+              <p id="temperatureforday">{{ day_temperature }}</p>
             </div>
             <div>
               <h2 id="titletimesforday"> Exercise times: </h2>
-              <p id="timesforday">First Exercise times</p>
+              <p id="timesforday">{{ exercise_time }}</p>
             </div>
           </div>
         </el-tab-pane>
@@ -113,7 +107,6 @@
             </div>
           </div>
         </el-tab-pane>
-        <button id="test_button" @click="callApi">Call API</button>
         <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="shouldRender" @completeRender="completeRender" />
       </el-tabs>
     </div>
@@ -1034,71 +1027,53 @@ export default {
     return {
       shouldRender: false,
       weekdata: {},
-      all_data: {},
-      week_selected: "0105010601070108010901100111",
+      exercise_time: 0,
+      day_temperature: "none",
+      day_barometer: "none",
+      day_humidity: "none",
+      all_shaking_data: {},
+      all_temperature_data: {},
+      all_barometer_data: {},
+      all_humidity_data: {},
       pickerOptions: {
          disabledDate: (time) => {
           return this.dealDisabledDate(time)
         }
       },
-      dayselect: '',
+      dayselect: "",
       tabPosition: 'right',
       chartoptions: {
         responsive: true,
         maintainAspectRatio: false
       },
       options: [{
-        value: '1201-1202-1203-1204-1205-1206-1207',
+        value: '1201120212031204120512061207',
         label: '191201-191207'
       }, {
-        value: '1208-1209-1210-1211-1212-1213-1214',
+        value: '1208120912101211121212131214',
         label: '191208-191214'
       }, {
-        value: '1215-1216-1217-1218-1219-1220-1221',
+        value: '1215121612171218121912201221',
         label: '191215-191223'
       }, {
-        value: '1222-1223-1224-1225-1226-1227-1228',
+        value: '1222122312241225122612271228',
         label: '191222-191228'
       }, {
-        value: '1229-1230-1231-0101-0102-0103-0104',
+        value: '1229123012310101010201030104',
         label: '191229-200104'
       }, {
-        value: '0105-0106-0107-0108-0109-0110-0111',
+        value: '0105010601070108010901100111',
         label: '200105-200111'
       }, {
-        value: '0112-0113-0114-0115-0116-0117-0118',
+        value: '0112011301140115011601170118',
         label: '200112-200118'
       }],
-      value: ''
+      value: '0105010601070108010901100111'
     }
   },
   components: {
     BarChart
   },
-  
-
-  // async mounted() {
-  //   try {
-  //     await anime.timeline({loop: true})
-  //     .add({
-  //       targets: '.ml15 .word',
-  //       scale: [14,1],
-  //       opacity: [0,1],
-  //       easing: "easeOutCirc",
-  //       duration: 800,
-  //       delay: (el, i) => 800 * i
-  //     }).add({
-  //       targets: '.ml15',
-  //       opacity: 0,
-  //       duration: 1000,
-  //       easing: "easeOutExpo",
-  //       delay: 1000
-  //     })
-  //   } catch(err) {
-  //     console.eerror('[error]')
-  //   }
-  // },
-
   methods: {
     completeRender() {
       this.shouldRender = false;
@@ -1123,16 +1098,34 @@ export default {
           var cur_date = response["data"][0]["created_at"].substring(5, 10)
           console.log(cur_date)
           var all_shaking_count = {}
+          var temp_temperature = {}
+          var temp_humidity = {}
+          var temp_barometer = {}
+          var max_temperature = "0"
+          var max_barometer = "0"
+          var max_humidity = "0"
 
           for(var i  = 0; i < data_num; i++) {
             var acc_x = response["data"][i]["acc_x"]
             var acc_y = response["data"][i]["acc_y"]
             var acc_z = response["data"][i]["acc_z"]
+            //console.log("before declare temperature")
+            var temperature = response["data"][i]["temperature"]
+            //console.log("after declare temperature")
+            var humidity = response["data"][i]["humidity"]
+            var barometer = response["data"][i]["barometer"]
 
             /* 若是當前進來的資料時間與前一個不同，表示已經是下一天了 */
             if (response["data"][i]["created_at"].substring(5, 10) != cur_date) {
               all_shaking_count[cur_date] = count
+              temp_temperature[cur_date] = parseInt(max_temperature).toString()
+              temp_humidity[cur_date] = parseInt(max_humidity).toString()
+              temp_barometer[cur_date] = parseFloat(max_barometer).toFixed(1).toString()
+
               count = 0
+              max_temperature = "0"
+              max_barometer = "0"
+              max_humidity = "0"
               cur_date = response["data"][i]["created_at"].substring(5, 10)
             }
 
@@ -1140,11 +1133,36 @@ export default {
             if (acc_x != null || acc_y != null || acc_z != null){
               count++;
             }
+
+            /* 如果有溫度，比較是否為最大值 */
+            if (temperature != null && parseInt(temperature) > parseInt(max_temperature)){
+              max_temperature = temperature
+            }
+            
+            /* 如果有濕度，比較是否為最大值 */
+            if (humidity != null && parseInt(humidity) > parseInt(max_humidity)){
+              max_humidity = humidity
+            }
+
+            /* 如果有氣壓，比較是否為最大值 */
+            if (barometer != null && parseInt(barometer) > parseInt(max_barometer)){
+              max_barometer = barometer
+            }
           }
           all_shaking_count[cur_date] = count
-          this.all_data = all_shaking_count
-          //console.log(this.all_data)
+          temp_temperature[cur_date] = parseInt(max_temperature).toString()
+          temp_humidity[cur_date] = parseInt(max_humidity).toString()
+          temp_barometer[cur_date] = parseFloat(max_barometer).toFixed(1).toString()
+
+          this.all_shaking_data = all_shaking_count
+          this.all_temperature_data = temp_temperature
+          this.all_barometer_data = temp_barometer
+          this.all_humidity_data = temp_humidity
+          //console.log(this.all_shaking_data)
           this.weekBarChartData()
+          //console.log(this.all_shaking_data)
+          console.log(this.all_temperature_data)
+          //console.log(this.all_barometer_data)
       })
       .catch((err) => {
         if (err.status === '200') {
@@ -1159,13 +1177,13 @@ export default {
       var data = []
       for(var i = 0; i < 7; i++)
       {
-        var cur_date = this.week_selected.substring(i*4, i*4+2) + "-" + this.week_selected.substring(i*4+2, i*4+4)
+        var cur_date = this.value.substring(i*4, i*4+2) + "-" + this.value.substring(i*4+2, i*4+4)
         /* 抓要畫的日期 */
         label.push(cur_date)
 
         /* 抓要畫的震動資料 */
-        if (this.all_data.hasOwnProperty(cur_date)) {
-          data.push(this.all_data[cur_date])
+        if (this.all_shaking_data.hasOwnProperty(cur_date)) {
+          data.push(this.all_shaking_data[cur_date])
         } else {
           data.push(0)
         }
@@ -1182,6 +1200,45 @@ export default {
       /*要再重新畫一次圖*/
       this.shouldRender = true
     },
+  },
+  watch: {
+    value() {
+      this.weekBarChartData();
+    },
+    dayselect: function() {
+      var cur_date = this.dayselect.substring(5, 10)
+
+      if (this.all_temperature_data.hasOwnProperty(cur_date)){
+        this.day_temperature = this.all_temperature_data[cur_date] + " Celsius degree"
+        console.log("temperature change! = " + this.day_temperature)
+      } else {
+        this.day_temperature = "none"
+      }
+
+      if (this.all_barometer_data.hasOwnProperty(cur_date)){
+        this.day_barometer = this.all_barometer_data[cur_date] + " hPA"
+        console.log("barometer change! = " + this.day_barometer)
+      } else {
+        this.day_barometer = "none"
+      }
+
+      if (this.all_humidity_data.hasOwnProperty(cur_date)){
+        this.day_humidity = this.all_humidity_data[cur_date] + " %"
+        console.log("humidity change! = " + this.day_humidity)
+      } else {
+        this.day_humidity = "none"
+      }
+
+      if (this.all_shaking_data.hasOwnProperty(cur_date)){
+        this.exercise_time = this.all_shaking_data[cur_date]
+        console.log("humidity change! = " + this.day_humidity)
+      } else {
+        this.exercise_time = "none"
+      }
+    }
+  },
+  mounted() {
+    this.callApi()
   }
 }
 
