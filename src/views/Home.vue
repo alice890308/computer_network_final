@@ -39,6 +39,12 @@
                 placeholder="Choose the date">
               </el-date-picker>
             </div>
+            <div> 
+              <i class="el-icon-odometer"></i> 
+              <i class="el-icon-sunny"></i> 
+              <i class="el-icon-heavy-rain"></i> 
+              <i class="el-icon-bicycle"></i> 
+            </div>
             <div>
               <h2 id="TotalHour">Past 2 months</h2> 
               <div class="wrapper">
@@ -173,6 +179,30 @@
   }
   .el-icon-arrow-down {
     font-size: 12px;
+  }
+  .el-icon-sunny {
+    font-size:35px;
+    position:relative; 
+    top:70px; 
+    left:340px; 
+  }
+  .el-icon-heavy-rain {
+    font-size:30px;
+    position:relative; 
+    top:-45px; 
+    left:320px; 
+  }
+  .el-icon-odometer {
+    font-size:32px;
+    position:relative; 
+    top:-153px; 
+    left:380px; 
+  }
+  .el-icon-bicycle {
+    font-size:40px;
+    position:relative; 
+    top:180px; 
+    left:290px; 
   }
   .block{
     // position:relative;
