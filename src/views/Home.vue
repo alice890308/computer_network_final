@@ -18,6 +18,14 @@
               <p id="text_introduction"> 提供使用者檢視自己的活動程度的平台 </p><br>
               <p id="text_introduction"> 了解自身的習慣進而促進平日活動量 </p><br>
             </div>
+            <div class="bubble">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
           </div>
         </el-tab-pane>
         <el-tab-pane label="Daily Report">
@@ -905,6 +913,106 @@
   .shadow-r {
     -webkit-animation: shadow-r-n .425s ease-in-out infinite alternate;
     animation: shadow-r-n .425s ease-in-out infinite alternate;
+  }
+
+  // body{
+  //   background:#89b6d3;
+  //   overflow:hidden;
+  //   z-index:1;
+  // }
+
+  .bubble{
+    position:absolute;
+    top:100;
+    left:0;
+    width:100%;
+    height:100%;
+    /*z-index defult value=1*/
+    z-index:0;
+    /*upgrade gpu rendering*/
+    transform:translateZ(0);
+    // background:#89b6d3;
+  }
+
+  .bubble div{
+    position:absolute;
+    list-style:none;
+    display:block;
+    background:rgba(255, 193, 193,0.2);
+    /*make bubble on page bottom*/
+    bottom:-100px; 
+    animation:bubble-ani 10s linear infinite;
+    border-radius:100%;
+  }
+
+  /* glow of the bubbles*/
+  .bubble div:before {
+      position: absolute;
+      left: 20%;
+      top: 21%;
+      width: 25%;
+      content: '';
+      background: rgba(255,255,255,0.2);
+      display: block;
+      height: 25%;
+      border-radius: 100%;
+  }
+
+  .bubble div:nth-child(1){
+    width:20px;
+    height:20px;
+    left:15%;
+  }
+
+  .bubble div:nth-child(2){
+    width:40px;
+    height:40px;
+    left:40%;
+    animation-duration:9s;
+    animation-delay:2s;
+  }
+
+  .bubble div:nth-child(3){
+    width:25px;
+    height:25px;
+    left:30%;
+    animation-duration:12s;
+    animation-delay:3.5s;
+  }
+
+  .bubble div:nth-child(4){
+    width:60px;
+    height:60px;
+    left:55%;
+    animation-duration:18s;
+    animation-delay:1.5s;
+  }
+
+  .bubble div:nth-child(5){
+    width:20px;
+    height:20px;
+    left:35%;
+    animation-duration:16s;
+    animation-delay:2s;
+  }
+
+  .bubble div:nth-child(6){
+    width:55px;
+    height:55px;
+    left:80%;
+    animation-duration:12s;
+    animation-delay:3.5s;
+  }
+
+  @keyframes bubble-ani {
+    0%{
+      -webkit-transform:translateY(0);
+      transform:translateY(0);
+    }
+    100%{
+      -webkit-transform:translateY(-1080px);
+      transform:translateY(-1080px);
+    }
   }
 </style>
 
