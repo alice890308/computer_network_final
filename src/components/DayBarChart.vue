@@ -12,17 +12,17 @@ export default {
       type: Object,
       default: null
     },
-    //shouldRender: {
-    //  type: Boolean,
-    //  default: false
-    //}
+    shouldRender: {
+      type: Boolean,
+      default: false
+    }
   },
-  //watch: {
-  //  shouldRender() {
-  //    this.renderChart(this.dataset, this.chartoptions);
-  //    if (this.shouldRender) this.$emit('completeRender');
-  //  }
-  //},
+  watch: {
+    shouldRender() {
+      this.renderChart(this.dataset, this.chartoptions);
+      if (this.shouldRender) this.$emit('completeRender');
+    }
+  },
   mounted() {
     this.renderChart(this.dataset, this.chartoptions);
   }
