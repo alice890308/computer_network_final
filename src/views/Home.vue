@@ -78,6 +78,7 @@
         </el-tab-pane>
         <el-tab-pane label="Weekly Report">
           <h1 id="animation">Weekly Report</h1>
+          <BarChart id="barchart" v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="weekShouldRender" @completeRender="completeRender" />
           <div class="SelectWeek">
             <el-select v-model="value" placeholder="--SelectWeek--">
               <el-option
@@ -109,8 +110,7 @@
             </div>
           </div>
         </el-tab-pane>
-        <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="weekShouldRender" @completeRender="completeRender" />
-      </el-tabs>
+        </el-tabs>
     </div>
     <hr>
     <div class="bottom">
@@ -142,6 +142,20 @@
 </template>
 
 <style lang="scss" scoped>
+    #daybarchart{
+      left: 500px;
+      top: 80px;
+      width: 300px; 
+      height: 300px;
+      position: relative;
+    }
+    #barchart{
+      left: 120px;
+      top: 40px;
+      width: 1150px; 
+      height: 450px;
+      position: relative;
+    }
     #animation {
       position: relative;
       font-family: Microsoft JhengHei;
@@ -196,35 +210,34 @@
   .el-icon-sunny {
     font-size:35px;
     position:relative; 
-    top:215px; 
+    top:-105px; 
     left:340px; 
   }
   .el-icon-heavy-rain {
     font-size:30px;
     position:relative; 
-    top:82px; 
+    top:-240px; 
     left:320px; 
   }
   .el-icon-odometer {
     font-size:32px;
     position:relative; 
-    top:-50px; 
+    top:-370px; 
     left:380px; 
   }
   .el-icon-bicycle {
     font-size:40px;
     position:relative; 
-    top:345px; 
+    top:25px; 
     left:290px; 
   }
   .block{
     // position:relative;
-    top:150px;
+    margin-top:100px;
+    margin-left:0px;
     // margin-top:200px; 
     // padding-top : 200px; 
     background-color:white;
-    position:relative;
-
   }
   #headerforday{
     color: #698474;
@@ -257,66 +270,66 @@
 
     #barometerforday{
       position:relative;
-      top:-160px;
+      top:-485px;
       left:450px;
       font-size: 25px;
       color: #8ac6d1;
     }
     #humidityforday{
       position:relative;
-      top:-135px;
+      top:-460px;
       left:450px;
       font-size: 25px;
       color: #8ac6d1;
     }
     #temperatureforday{
       position:relative;
-      top:-110px;
+      top:-435px;
       left:450px;
       font-size: 25px;
       color: #8ac6d1;
     }
     #timesforday{
       position:relative;
-      top:-85px;
+      top:-410px;
       left:450px;
       font-size: 25px;
       color: #8ac6d1;
     }
     #titlebarometerforday{
       position:relative;
-      top:-160px;
+      top:-480px;
       left:450px;
       color: #2c7873;
     }
     #titlehumidityforday{
       position:relative;
-      top:-135px;
+      top:-455px;
       left:450px;
       color: #2c7873;
     }
     #titletemperatureforday{
       position:relative;
-      top:-110px;
+      top:-430px;
       left:450px;
       color: #2c7873;
     }
     #titletimesforday{
       position:relative;
-      top:-85px;
+      top:-405px;
       left:450px;
       color: #2c7873;
     }
     #TotalHour{
       position:relative;
-      top:-10px;
+      top:-350px;
       left:-450px;
       color: #698474;
     }
   }
   .SelectWeek{
-    margin-top:0px; 
-    margin-left: -800px;
+    margin-top:100px; 
+    margin-left: 0px;
     background-color:white;
     position:relative;
     // width: 1650px; // selectweek block's height (count from title's head)
@@ -377,7 +390,7 @@
     top: 45%;
     left: 50%;
     width: 90%;
-    margin-top:-80px;
+    margin-top:-60px;
     margin-left:-450px;
     font-size: 0;
     transform: translate(-50%);
@@ -937,7 +950,7 @@
     position:absolute;
     list-style:none;
     display:block;
-    background:rgba(255, 193, 193,0.2);
+    background:rgba(205, 85, 85,0.2);
     /*make bubble on page bottom*/
     bottom:300px; 
     animation:bubble-ani 10s linear infinite;
@@ -1101,7 +1114,7 @@ export default {
                                                       'Accept': 'application/json'}
       })
       .then((response) => {
-          console.log(response);
+          console.log("response" + response);
           /* 會用到的變數 */
           var count = 0;
           var data_num = response["data"]["length"]
@@ -1119,7 +1132,9 @@ export default {
             var acc_x = response["data"][i]["acc_x"]
             var acc_y = response["data"][i]["acc_y"]
             var acc_z = response["data"][i]["acc_z"]
+            //console.log("before declare temperature")
             var temperature = response["data"][i]["temperature"]
+            //console.log("after declare temperature")
             var humidity = response["data"][i]["humidity"]
             var barometer = response["data"][i]["barometer"]
 
@@ -1261,7 +1276,6 @@ export default {
       this.weekBarChartData();
     },
     dayselect() {
-      console.log("dayselect = " + this.dayselect)
       var cur_date = this.dayselect.substring(5, 10)
 
       this.callDayApi()
@@ -1299,5 +1313,4 @@ export default {
     this.callApi()
   }
 }
-
 </script>
