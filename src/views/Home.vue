@@ -10,7 +10,7 @@
       <div id="runnerdiv" ><img id="runner" src="https://scontent-hkg3-2.xx.fbcdn.net/v/t1.0-9/s960x960/82005295_2437665073022914_8857725493667954688_o.jpg?_nc_cat=111&_nc_ohc=3x5X6GOx6eoAX_yMB6Z&_nc_ht=scontent-hkg3-2.xx&_nc_tp=1&oh=f192c2413613689b42ad04a8bd749b05&oe=5EA24E40" ></div>
       <div class="animation2">Keep on going.</div> 
       <div class="animation3"> 
-        <span id="animation2s">never give up.</span>
+        <span id="animation2s">Never give up.</span>
       </div>
     </div>
     <hr>
@@ -136,10 +136,10 @@
       font-size: 2em;
       letter-spacing: 4px;
       overflow: hidden;
-      background: linear-gradient(90deg, #000, #fff, #000);
-      background-repeat: no-repeat;
+      background: linear-gradient(90deg, #fe8761, #bbe1fa, #000);
+      background-repeat: repeat;
       background-size: 80%;
-      animation: animate 6s linear infinite;
+      animation: animate 10s linear infinite;
       -webkit-background-clip: text;
       -webkit-text-fill-color: rgba(255, 255, 255, 0);
     }
@@ -650,7 +650,7 @@
       white-space:nowrap;
       text-align:center;
       color:#f4f4f4;
-      font-family:'Roboto';
+      font-family:'Roboto', sans-serif;
       font-weight : bold;
       font-size:35px;
       letter-spacing:10px;
@@ -690,7 +690,7 @@
   .animation3{
       text-align:center;
       color:#f4f4f4;
-      font-family:'Roboto';
+      font-family:'Roboto', sans-serif;
       font-weight : bold;
       font-size:35px;
       letter-spacing:10px;
