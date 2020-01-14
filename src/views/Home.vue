@@ -41,6 +41,7 @@
                 placeholder="Choose the date">
               </el-date-picker>
             </div>
+            <!--div><tempChart v-bind:dataset="temp" v-bind:chartoptions="chartoptions" :shouldRender=false @completeRender="completeRender" /></div-->
             <div> 
               <i class="el-icon-odometer"></i> 
               <i class="el-icon-sunny"></i> 
@@ -56,7 +57,9 @@
                   <span class="letter">:</span><span class="letter">2</span><span class="letter">2</span>
                   <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span></div>
                 <!--p>Generate Random Text Transformation Using CSS Only</p-->
+              </div>
             </div>
+            <div>
               <h2 id="titlebarometerforday"> Barometer value: </h2>
               <p id="barometerforday">{{ day_barometer }}</p>
             </div>
@@ -1023,12 +1026,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>
 import BarChart from "../components/BarChart.vue";
+import tempChart from "../components/tempChart.vue";
 import axios from 'axios'
 
 export default {
   name: 'home',
   data() {
     return {
+      temp: {},
       shouldRender: false,
       weekdata: {},
       exercise_time: 0,
@@ -1076,7 +1081,8 @@ export default {
     }
   },
   components: {
-    BarChart
+    BarChart,
+    tempChart
   },
   methods: {
     completeRender() {
@@ -1095,7 +1101,7 @@ export default {
                                                       'Accept': 'application/json'}
       })
       .then((response) => {
-          console.log(response);
+          console.log("response" + response);
           /* 會用到的變數 */
           var count = 0;
           var data_num = response["data"]["length"]
