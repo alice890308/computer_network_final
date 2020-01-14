@@ -40,6 +40,7 @@
                 value-format="yyyy-MM-dd"
                 placeholder="Choose the date">
               </el-date-picker>
+              <DayBarChart v-bind:dataset="temp_dataset" v-bind:chartoptions="temp_chartoptions" width="300" height="300"/>
             </div>
             <div> 
               <i class="el-icon-odometer"></i> 
@@ -48,15 +49,16 @@
               <i class="el-icon-bicycle"></i> 
             </div>
             <div>
-              <h1 id="TotalHour">Past 2 months</h1> 
+              <h1 id="TotalHour">Past 2 months</h1>
               <div class="wrapper">
                 <div class="letters">
                   <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
                   <span class="letter">c</span><span class="letter">i</span><span class="letter">s</span><span class="letter">e</span>
                   <span class="letter">:</span><span class="letter">2</span><span class="letter">2</span>
-                  <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span></div>
+                  <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span>
+                </div>
                 <!--p>Generate Random Text Transformation Using CSS Only</p-->
-            </div>
+              </div>
               <h2 id="titlebarometerforday"> Barometer value: </h2>
               <p id="barometerforday">{{ day_barometer }}</p>
             </div>
@@ -918,13 +920,6 @@
     -webkit-animation: shadow-r-n .425s ease-in-out infinite alternate;
     animation: shadow-r-n .425s ease-in-out infinite alternate;
   }
-
-  // body{
-  //   background:#89b6d3;
-  //   overflow:hidden;
-  //   z-index:1;
-  // }
-
   .bubble{
     position:absolute;
     top:100;
@@ -1023,12 +1018,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>
 import BarChart from "../components/BarChart.vue";
+import DayBarChart from "../components/DayBarChart.vue";
 import axios from 'axios'
 
 export default {
   name: 'home',
   data() {
     return {
+      temp_dataset:{
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ],
+        datasets: [
+          {
+            label: "a bar chart",
+            backgroundColor: "#f87979",
+            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+          }
+        ]
+      },
+      temp_chartoptions:{
+        responsive: false,
+        maintainAspectRatio: false 
+      },
       shouldRender: false,
       weekdata: {},
       exercise_time: 0,
@@ -1076,7 +1099,8 @@ export default {
     }
   },
   components: {
-    BarChart
+    BarChart,
+    DayBarChart
   },
   methods: {
     completeRender() {
