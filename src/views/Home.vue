@@ -951,7 +951,7 @@
     position:absolute;
     list-style:none;
     display:block;
-    background:rgba(255, 193, 193,0.2);
+    background:rgba(205, 85, 85,0.2);
     /*make bubble on page bottom*/
     bottom:300px; 
     animation:bubble-ani 10s linear infinite;
