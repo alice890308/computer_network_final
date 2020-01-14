@@ -48,12 +48,12 @@
               <i class="el-icon-bicycle"></i> 
             </div>
             <div>
-              <h2 id="TotalHour">Past 2 months</h2> 
+              <h1 id="TotalHour">Past 2 months</h1> 
               <div class="wrapper">
                 <div class="letters">
                   <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
                   <span class="letter">c</span><span class="letter">i</span><span class="letter">s</span><span class="letter">e</span>
-                  <span class="letter">:</span><span class="letter">2</span><span class="letter">0</span>
+                  <span class="letter">:</span><span class="letter">2</span><span class="letter">2</span>
                   <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span></div>
                 <!--p>Generate Random Text Transformation Using CSS Only</p-->
             </div>
@@ -194,32 +194,32 @@
   .el-icon-sunny {
     font-size:35px;
     position:relative; 
-    top:70px; 
+    top:215px; 
     left:340px; 
   }
   .el-icon-heavy-rain {
     font-size:30px;
     position:relative; 
-    top:-45px; 
+    top:82px; 
     left:320px; 
   }
   .el-icon-odometer {
     font-size:32px;
     position:relative; 
-    top:-153px; 
+    top:-50px; 
     left:380px; 
   }
   .el-icon-bicycle {
     font-size:40px;
     position:relative; 
-    top:180px; 
+    top:345px; 
     left:290px; 
   }
   .block{
     // position:relative;
-    // top:150px;
+    top:150px;
     // margin-top:200px; 
-    padding-top : 200px; 
+    // padding-top : 200px; 
     background-color:white;
     position:relative;
 
@@ -255,55 +255,59 @@
 
     #barometerforday{
       position:relative;
-      top:-250px;
+      top:-160px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #humidityforday{
       position:relative;
-      top:-225px;
+      top:-135px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #temperatureforday{
       position:relative;
-      top:-200px;
+      top:-110px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #timesforday{
       position:relative;
-      top:-175px;
+      top:-85px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #titlebarometerforday{
       position:relative;
-      top:-250px;
+      top:-160px;
       left:450px;
       color: #2c7873;
     }
     #titlehumidityforday{
       position:relative;
-      top:-225px;
+      top:-135px;
       left:450px;
       color: #2c7873;
     }
     #titletemperatureforday{
       position:relative;
-      top:-200px;
+      top:-110px;
       left:450px;
       color: #2c7873;
     }
     #titletimesforday{
       position:relative;
-      top:-175px;
+      top:-85px;
       left:450px;
       color: #2c7873;
     }
     #TotalHour{
       position:relative;
-      top:-150px;
+      top:-10px;
       left:-450px;
       color: #698474;
     }
@@ -368,10 +372,10 @@
   // }
   .wrapper {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     width: 90%;
-    margin-top:-100px;
+    margin-top:-80px;
     margin-left:-450px;
     font-size: 0;
     transform: translate(-50%);
