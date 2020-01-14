@@ -18,6 +18,14 @@
               <p id="text_introduction"> 提供使用者檢視自己的活動程度的平台 </p><br>
               <p id="text_introduction"> 了解自身的習慣進而促進平日活動量 </p><br>
             </div>
+            <div class="bubble">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
           </div>
         </el-tab-pane>
         <el-tab-pane label="Daily Report">
@@ -40,12 +48,12 @@
               <i class="el-icon-bicycle"></i> 
             </div>
             <div>
-              <h2 id="TotalHour">Past 2 months</h2> 
+              <h1 id="TotalHour">Past 2 months</h1> 
               <div class="wrapper">
                 <div class="letters">
                   <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
                   <span class="letter">c</span><span class="letter">i</span><span class="letter">s</span><span class="letter">e</span>
-                  <span class="letter">:</span><span class="letter">2</span><span class="letter">0</span>
+                  <span class="letter">:</span><span class="letter">2</span><span class="letter">2</span>
                   <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span></div>
                 <!--p>Generate Random Text Transformation Using CSS Only</p-->
             </div>
@@ -186,32 +194,32 @@
   .el-icon-sunny {
     font-size:35px;
     position:relative; 
-    top:70px; 
+    top:215px; 
     left:340px; 
   }
   .el-icon-heavy-rain {
     font-size:30px;
     position:relative; 
-    top:-45px; 
+    top:82px; 
     left:320px; 
   }
   .el-icon-odometer {
     font-size:32px;
     position:relative; 
-    top:-153px; 
+    top:-50px; 
     left:380px; 
   }
   .el-icon-bicycle {
     font-size:40px;
     position:relative; 
-    top:180px; 
+    top:345px; 
     left:290px; 
   }
   .block{
     // position:relative;
-    // top:150px;
+    top:150px;
     // margin-top:200px; 
-    padding-top : 200px; 
+    // padding-top : 200px; 
     background-color:white;
     position:relative;
 
@@ -247,55 +255,59 @@
 
     #barometerforday{
       position:relative;
-      top:-250px;
+      top:-160px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #humidityforday{
       position:relative;
-      top:-225px;
+      top:-135px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #temperatureforday{
       position:relative;
-      top:-200px;
+      top:-110px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #timesforday{
       position:relative;
-      top:-175px;
+      top:-85px;
       left:450px;
+      font-size: 25px;
       color: #8ac6d1;
     }
     #titlebarometerforday{
       position:relative;
-      top:-250px;
+      top:-160px;
       left:450px;
       color: #2c7873;
     }
     #titlehumidityforday{
       position:relative;
-      top:-225px;
+      top:-135px;
       left:450px;
       color: #2c7873;
     }
     #titletemperatureforday{
       position:relative;
-      top:-200px;
+      top:-110px;
       left:450px;
       color: #2c7873;
     }
     #titletimesforday{
       position:relative;
-      top:-175px;
+      top:-85px;
       left:450px;
       color: #2c7873;
     }
     #TotalHour{
       position:relative;
-      top:-150px;
+      top:-10px;
       left:-450px;
       color: #698474;
     }
@@ -360,10 +372,10 @@
   // }
   .wrapper {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     width: 90%;
-    margin-top:-100px;
+    margin-top:-80px;
     margin-left:-450px;
     font-size: 0;
     transform: translate(-50%);
@@ -905,6 +917,106 @@
   .shadow-r {
     -webkit-animation: shadow-r-n .425s ease-in-out infinite alternate;
     animation: shadow-r-n .425s ease-in-out infinite alternate;
+  }
+
+  // body{
+  //   background:#89b6d3;
+  //   overflow:hidden;
+  //   z-index:1;
+  // }
+
+  .bubble{
+    position:absolute;
+    top:100;
+    left:0;
+    width:100%;
+    height:100%;
+    /*z-index defult value=1*/
+    z-index:0;
+    /*upgrade gpu rendering*/
+    transform:translateZ(0);
+    // background:#89b6d3;
+  }
+
+  .bubble div{
+    position:absolute;
+    list-style:none;
+    display:block;
+    background:rgba(255, 193, 193,0.2);
+    /*make bubble on page bottom*/
+    bottom:300px; 
+    animation:bubble-ani 10s linear infinite;
+    border-radius:100%;
+  }
+
+  /* glow of the bubbles*/
+  .bubble div:before {
+      position: absolute;
+      left: 20%;
+      top: 21%;
+      width: 25%;
+      content: '';
+      background: rgba(255,255,255,0.2);
+      display: block;
+      height: 25%;
+      border-radius: 100%;
+  }
+
+  .bubble div:nth-child(1){
+    width:20px;
+    height:20px;
+    left:15%;
+  }
+
+  .bubble div:nth-child(2){
+    width:40px;
+    height:40px;
+    left:40%;
+    animation-duration:9s;
+    animation-delay:2s;
+  }
+
+  .bubble div:nth-child(3){
+    width:25px;
+    height:25px;
+    left:30%;
+    animation-duration:12s;
+    animation-delay:3.5s;
+  }
+
+  .bubble div:nth-child(4){
+    width:60px;
+    height:60px;
+    left:55%;
+    animation-duration:18s;
+    animation-delay:1.5s;
+  }
+
+  .bubble div:nth-child(5){
+    width:20px;
+    height:20px;
+    left:35%;
+    animation-duration:16s;
+    animation-delay:2s;
+  }
+
+  .bubble div:nth-child(6){
+    width:55px;
+    height:55px;
+    left:80%;
+    animation-duration:12s;
+    animation-delay:3.5s;
+  }
+
+  @keyframes bubble-ani {
+    0%{
+      -webkit-transform:translateY(0);
+      transform:translateY(0);
+    }
+    100%{
+      -webkit-transform:translateY(-1080px);
+      transform:translateY(-1080px);
+    }
   }
 </style>
 
