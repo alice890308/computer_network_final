@@ -99,7 +99,6 @@
             </div>
           </div>
         </el-tab-pane>
-        <button id="test_button" @click="callApi">Call API</button>
         <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="shouldRender" @completeRender="completeRender" />
       </el-tabs>
     </div>
@@ -1100,22 +1099,23 @@ export default {
     },
     dayselect: function() {
       var cur_date = this.dayselect.substring(5, 10)
+
       if (this.all_temperature_data.hasOwnProperty(cur_date)){
-        this.day_temperature = this.all_temperature_data[cur_date]
+        this.day_temperature = this.all_temperature_data[cur_date] + " Celsius degree"
         console.log("temperature change! = " + this.day_temperature)
       } else {
         this.day_temperature = "none"
       }
 
       if (this.all_barometer_data.hasOwnProperty(cur_date)){
-        this.day_barometer = this.all_barometer_data[cur_date]
+        this.day_barometer = this.all_barometer_data[cur_date] + " hPA"
         console.log("barometer change! = " + this.day_barometer)
       } else {
         this.day_barometer = "none"
       }
 
       if (this.all_humidity_data.hasOwnProperty(cur_date)){
-        this.day_humidity = this.all_humidity_data[cur_date]
+        this.day_humidity = this.all_humidity_data[cur_date] + " %"
         console.log("humidity change! = " + this.day_humidity)
       } else {
         this.day_humidity = "none"
@@ -1128,6 +1128,9 @@ export default {
         this.exercise_time = "none"
       }
     }
+  },
+  mounted() {
+    this.callApi()
   }
 }
 
