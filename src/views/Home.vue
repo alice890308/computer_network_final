@@ -40,7 +40,7 @@
               </el-date-picker>
             </div>
             <div>
-              <h2 id="TotalHour">Pass 2 months</h2> 
+              <h2 id="TotalHour">Past 2 months</h2> 
               <div class="wrapper">
                 <div class="letters">
                   <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
@@ -112,7 +112,6 @@
   </div>
 </template>
 
-<<<<<<< HEAD
 <style lang="scss" scoped>
     // body {
     //   margin: 0;
@@ -151,9 +150,7 @@
   #runnerdiv{
     z-index: 1;
   }
-=======
-<style lang="scss" scoped> 
->>>>>>> master
+
   #runner {
     width: 100vw;
     height: 100vh;
