@@ -35,6 +35,14 @@
             </div>
             <div>
               <h2 id="TotalHour">Pass 2 months</h2> 
+              <div class="wrapper">
+                <div class="letters">
+                  <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
+                  <span class="letter">c</span><span class="letter">i</span><span class="letter">s</span><span class="letter">e</span>
+                  <span class="letter">:</span><span class="letter">2</span><span class="letter">0</span>
+                  <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span></div>
+                <!--p>Generate Random Text Transformation Using CSS Only</p-->
+            </div>
               <h2 id="titlebarometerforday"> Barometer value: </h2>
               <p id="barometerforday">First Barometer value</p>
             </div>
@@ -98,7 +106,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped> 
   #runner {
     width: 100vw;
     height: 100vh;
@@ -269,10 +277,302 @@
       left:-710px;
     }
   }
+  // body {
+  //   text-align: center;
+  //   background-color: #1a3e59;
+  // }
+  .wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    margin-top:-100px;
+    margin-left:-450px;
+    font-size: 0;
+    transform: translate(-50%);
+  }
+  .letter {
+    width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0;
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #6c7b95;
+  }
+  .letter:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    word-break: break-all;
+    background-color: #e4f9ff;
+  }
+  .letter:nth-child(1):before {
+    content: "2851409736";
+    margin-top: -216px;
+    animation-name: letter1;
+    animation-duration: 0.108s;
+    animation-delay: 0.97s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter1 {
+    from {
+      margin-top: -216px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(2):before {
+    content: "6025841397";
+    margin-top: -144px;
+    animation-name: letter2;
+    animation-duration: 3.1542857143s;
+    animation-delay: 0.08s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter2 {
+    from {
+      margin-top: -144px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(3):before {
+    content: "8573126049";
+    margin-top: -120px;
+    animation-name: letter3;
+    animation-duration: 1.0333333333s;
+    animation-delay: 0.69s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter3 {
+    from {
+      margin-top: -120px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(4):before {
+    content: "6290387451";
+    margin-top: -144px;
+    animation-name: letter4;
+    animation-duration: 1.7828571429s;
+    animation-delay: 0.48s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter4 {
+    from {
+      margin-top: -144px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(5):before {
+    content: "9207483651";
+    margin-top: -48px;
+    animation-name: letter5;
+    animation-duration: 2s;
+    animation-delay: 0.25s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter5 {
+    from {
+      margin-top: -48px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(6):before {
+    content: "4215890763";
+    margin-top: -144px;
+    animation-name: letter6;
+    animation-duration: 1.5771428571s;
+    animation-delay: 0.54s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter6 {
+    from {
+      margin-top: -144px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(7):before {
+    content: "8341652970";
+    margin-top: -120px;
+    animation-name: letter7;
+    animation-duration: 1.3666666667s;
+    animation-delay: 0.59s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter7 {
+    from {
+      margin-top: -120px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(8):before {
+    content: "4673082915";
+    margin-top: -168px;
+    animation-name: letter8;
+    animation-duration: 2.8s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter8 {
+    from {
+      margin-top: -168px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(9):before {
+    content: "3416580972";
+    margin-top: -72px;
+    animation-name: letter9;
+    animation-duration: 2.61s;
+    animation-delay: 0.13s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter9 {
+    from {
+      margin-top: -72px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(10):before {
+    content: "2365940817";
+    margin-top: -168px;
+    animation-name: letter10;
+    animation-duration: 0.175s;
+    animation-delay: 0.95s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter10 {
+    from {
+      margin-top: -168px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(11):before {
+    content: "2810473956";
+    margin-top: -72px;
+    animation-name: letter11;
+    animation-duration: 0.87s;
+    animation-delay: 0.71s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter11 {
+    from {
+      margin-top: -72px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(12):before {
+    content: "9078132645";
+    margin-top: -24px;
+    animation-name: letter12;
+    animation-duration: 1.92s;
+    animation-delay: 0.04s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter12 {
+    from {
+      margin-top: -24px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(13):before {
+    content: "4513968027";
+    margin-top: -96px;
+    animation-name: letter13;
+    animation-duration: 1.28s;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter13 {
+    from {
+      margin-top: -96px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(14):before {
+    content: "8362049175";
+    margin-top: -192px;
+    animation-name: letter14;
+    animation-duration: 3.0222222222s;
+    animation-delay: 0.15s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter14 {
+    from {
+      margin-top: -192px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(15):before {
+    content: "8091674325";
+    margin-top: -192px;
+    animation-name: letter15;
+    animation-duration: 2.1333333333s;
+    animation-delay: 0.4s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter15 {
+    from {
+      margin-top: -192px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(16):before {
+    content: "3610987425";
+    margin-top: 0px;
+    animation-name: letter16;
+    animation-duration: 0s;
+    animation-delay: 0.58s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter16 {
+    from {
+      margin-top: 0px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
 
 </style>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>
 import BarChart from "../components/BarChart.vue";
 import axios from 'axios'
@@ -310,7 +610,7 @@ export default {
         label: '191222-191228'
       }, {
         value: '1229-1230-1231-0101-0102-0103-0104',
-        label: '1229-200104'
+        label: '191229-200104'
       }, {
         value: '0105-0106-0107-0108-0109-0110-0111',
         label: '200105-200111'
@@ -324,6 +624,29 @@ export default {
   components: {
     BarChart
   },
+  
+
+  // async mounted() {
+  //   try {
+  //     await anime.timeline({loop: true})
+  //     .add({
+  //       targets: '.ml15 .word',
+  //       scale: [14,1],
+  //       opacity: [0,1],
+  //       easing: "easeOutCirc",
+  //       duration: 800,
+  //       delay: (el, i) => 800 * i
+  //     }).add({
+  //       targets: '.ml15',
+  //       opacity: 0,
+  //       duration: 1000,
+  //       easing: "easeOutExpo",
+  //       delay: 1000
+  //     })
+  //   } catch(err) {
+  //     console.eerror('[error]')
+  //   }
+  // },
 
   methods: {
     completeRender() {
