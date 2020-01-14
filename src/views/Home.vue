@@ -1,11 +1,5 @@
 <template>
 	<div>
-    
-    <!--h1>ICN Final Project API Example</h1>
-    <button id="test_button" @click="callApi">Call API</button-->
-
-    <!-- <h1>Example</h1>
-    <button id="test_button" @click="callApi">Call API</button> -->
     <div>
       <div id="runnerdiv" ><img id="runner" src="https://scontent-hkg3-2.xx.fbcdn.net/v/t1.0-9/s960x960/82005295_2437665073022914_8857725493667954688_o.jpg?_nc_cat=111&_nc_ohc=3x5X6GOx6eoAX_yMB6Z&_nc_ht=scontent-hkg3-2.xx&_nc_tp=1&oh=f192c2413613689b42ad04a8bd749b05&oe=5EA24E40" ></div>
       <div class="animation2">Keep on going.</div> 
@@ -139,16 +133,6 @@
 </template>
 
 <style lang="scss" scoped>
-    // body {
-    //   margin: 0;
-    //   padding: 0;
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
-    //   height: 100vh;
-    //   background-color: #000;
-    // }
-
     #animation {
       position: relative;
       font-family: Microsoft JhengHei;
