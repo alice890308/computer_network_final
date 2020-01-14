@@ -944,7 +944,7 @@
     display:block;
     background:rgba(255, 193, 193,0.2);
     /*make bubble on page bottom*/
-    bottom:-100px; 
+    bottom:300px; 
     animation:bubble-ani 10s linear infinite;
     border-radius:100%;
   }
