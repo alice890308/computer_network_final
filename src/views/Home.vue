@@ -40,9 +40,8 @@
                 value-format="yyyy-MM-dd"
                 placeholder="Choose the date">
               </el-date-picker>
-              <DayBarChart id="daybarchart" v-bind:dataset="temp_dataset" v-bind:chartoptions="temp_chartoptions"/>
+              <DayBarChart id="daybarchart" v-bind:dataset="day_data" v-bind:chartoptions="temp_chartoptions" :shouldRender="dayShouldRender" @completeRender="dayCompleteRender"/>
             </div>
-            <!--div><tempChart v-bind:dataset="temp" v-bind:chartoptions="chartoptions" :shouldRender=false @completeRender="completeRender" /></div-->
             <div> 
               <i class="el-icon-odometer"></i> 
               <i class="el-icon-sunny"></i> 
@@ -64,7 +63,7 @@
               <p id="barometerforday">{{ day_barometer }}</p>
             </div>
             <div>
-              <h2 id="titlehumidityforday"> Humudity value: </h2>
+              <h2 id="titlehumidityforday"> Humidity value: </h2>
               <p id="humidityforday">{{ day_humidity }}</p>
             </div>
             <div>
@@ -79,7 +78,7 @@
         </el-tab-pane>
         <el-tab-pane label="Weekly Report">
           <h1 id="animation">Weekly Report</h1>
-          <BarChart  id="barchart" v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="shouldRender" @completeRender="completeRender" />
+          <BarChart id="barchart" v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="weekShouldRender" @completeRender="completeRender" />
           <div class="SelectWeek">
             <el-select v-model="value" placeholder="--SelectWeek--">
               <el-option
@@ -1039,35 +1038,14 @@ export default {
   name: 'home',
   data() {
     return {
-      temp_dataset:{
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ],
-        datasets: [
-          {
-            label: "a bar chart",
-            backgroundColor: "#f87979",
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-          }
-        ]
-      },
       temp_chartoptions:{
         responsive: false,
         maintainAspectRatio: false 
       },
-      shouldRender: false,
+      weekShouldRender: false,
+      dayShouldRender: false,
       weekdata: {},
+      day_data: {},
       exercise_time: 0,
       day_temperature: "none",
       day_barometer: "none",
@@ -1118,7 +1096,10 @@ export default {
   },
   methods: {
     completeRender() {
-      this.shouldRender = false;
+      this.weekShouldRender = false;
+    },
+    dayCompleteRender() {
+      this.dayShouldRender = false;
     },
     dealDisabledDate (time) {
       let day = 60 * 24 * 3600 * 1000
@@ -1240,15 +1221,64 @@ export default {
       }]
       console.log(this.weekdata)
       /*要再重新畫一次圖*/
-      this.shouldRender = true
+      this.weekShouldRender = true
     },
+    callDayApi: function() {
+      var macaddr = "?macaddr=" + "aa15ec12";
+      var date_filter = "&date_filter=" + this.dayselect + " 00:00:00+-+" + this.dayselect + " 23:59:59";
+      axios.post("https://campus.kits.tw/ICN_API" + macaddr + date_filter, 
+                  null,
+                  { headers: {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImMzMDU5NTFjZGJmNGQ4MDM4M2IxOTA5MDhlNzBlOGZmMzA2Y2RkNjhhOWZhNTY1MWFlZTA0NzNkMTEwYTgwN2Y2MTgwMGZiMGI3NDhhZjdmIn0.eyJhdWQiOiIyIiwianRpIjoiYzMwNTk1MWNkYmY0ZDgwMzgzYjE5MDkwOGU3MGU4ZmYzMDZjZGQ2OGE5ZmE1NjUxYWVlMDQ3M2QxMTBhODA3ZjYxODAwZmIwYjc0OGFmN2YiLCJpYXQiOjE1NzYxNTkxMzEsIm5iZiI6MTU3NjE1OTEzMSwiZXhwIjoxNjA3NzgxNTMxLCJzdWIiOiIyNTIiLCJzY29wZXMiOltdfQ.hDDzk7StTJ0czRT8vHPJoQYxhTpbrr2auYdXyewXFW6yYtBdZFpRshsrRfLbX4pNXhQq_Q1orEe7gO0w_3HukCwWvXf0ajNL-Zvmuay5wcbiIYTaL_-w7nWtTshUVnOw2lX6DKHdxY1Q17nJvK0o39leChMAeIc88Oabx3gCprny983kA4LDwyPd3S5_Eu8J7i5giuR_ul3PF37W5Z2ymNRR3RBZaJkV2IEQAsHhiMmuNpjcKZXvU3zegS6Q-2dviNQsKWYnrSN8rMeq5xljDaOzCR-ueWDuDgmpYOo_nGqQusRJbLGdPy9BGs0_pWgb-yD2e4Fu34fBzg_CLaffSFaKxFEoz12GHwGfczu2NeVH69jp8vvuAzRBfo1Gm8PboBhm07MX3jlXhTM-P6IX4GxjfDcZFFVO7gygOJ6GRRM_1WtvB9XmEu2mA-AJ_BC08GU0JKx_qLo3N17WwnxPoaqNrqJ-v8RwBRBAfyVmUqh7nbJTLw4SnUYkoyjV6KX_RGIcT8Ovr4upyoDmYgnKwxy1Tsh3yMVgg7jGTMw_3IxgOdxcIn2H6pWQCYUqhp8NJuzvhDAz7XdwbAeJuYr6LwX-3Ei1KWHD04kzI8GZmfwmvPMxQGgLEkMVc028YM2cFPYtuGBRFxcxw3vmTB1dR7kAQ1W4u_ksfk415Ri6NQ4', 
+                                                      'Accept': 'application/json'}
+      })
+      .then((response) => {
+        var data_num = response["data"]["length"]
+        var cur_hour = 0
+        var shaking_count = 0
+        var temp_day_shaking = []
+
+        for(var i = 0; i < data_num; i++){
+          var d_hour = parseInt(response["data"][i]["created_at"].substring(11, 13))
+          var acc_x = response["data"][i]["acc_x"]
+          var acc_y = response["data"][i]["acc_y"]
+          var acc_z = response["data"][i]["acc_z"]
+
+          /* 下一個區間 */
+          if (d_hour > cur_hour*2+1){
+            temp_day_shaking.push(shaking_count)
+            shaking_count = 0
+            cur_hour++
+          }
+
+          /* 如果有震動，shaking_count++ */
+          if (acc_x != null || acc_y != null || acc_z != null){
+            shaking_count++
+          }
+        }
+        temp_day_shaking.push(shaking_count)
+        console.log(temp_day_shaking)
+        this.day_data["datasets"] = [{
+          data:temp_day_shaking,
+          backgroundColor: "#ff9d76",
+          label: "Dayly Analysis"
+        }]
+        this.day_data["labels"] = ["1","3","5","7","9","11","13","15","17","19","21","23"]
+        console.log(this.day_data)
+        this.dayShouldRender = true
+      })
+      .catch((err) => {
+        alert(err)
+      })
+    }
   },
   watch: {
     value() {
       this.weekBarChartData();
     },
-    dayselect: function() {
+    dayselect() {
       var cur_date = this.dayselect.substring(5, 10)
+
+      this.callDayApi()
 
       if (this.all_temperature_data.hasOwnProperty(cur_date)){
         this.day_temperature = this.all_temperature_data[cur_date] + " Celsius degree"
@@ -1283,5 +1313,4 @@ export default {
     this.callApi()
   }
 }
-
 </script>
