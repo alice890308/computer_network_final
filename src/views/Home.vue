@@ -79,7 +79,7 @@
         </el-tab-pane>
         <el-tab-pane label="Weekly Report">
           <h1 id="animation">Weekly Report</h1>
-          <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="shouldRender" @completeRender="completeRender" />
+          <BarChart  id="barchart" v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="shouldRender" @completeRender="completeRender" />
           <div class="SelectWeek">
             <el-select v-model="value" placeholder="--SelectWeek--">
               <el-option
@@ -148,6 +148,13 @@
       top: 80px;
       width: 300px; 
       height: 300px;
+      position: relative;
+    }
+    #barchart{
+      left: 120px;
+      top: 40px;
+      width: 1150px; 
+      height: 450px;
       position: relative;
     }
     #animation {
