@@ -40,6 +40,7 @@
                 value-format="yyyy-MM-dd"
                 placeholder="Choose the date">
               </el-date-picker>
+              <DayBarChart v-bind:dataset="temp_dataset" v-bind:chartoptions="temp_chartoptions" width="300" height="300"/>
             </div>
             <!--div><tempChart v-bind:dataset="temp" v-bind:chartoptions="chartoptions" :shouldRender=false @completeRender="completeRender" /></div-->
             <div> 
@@ -49,17 +50,21 @@
               <i class="el-icon-bicycle"></i> 
             </div>
             <div>
-              <h1 id="TotalHour">Past 2 months</h1> 
+              <h1 id="TotalHour">Past 2 months</h1>
               <div class="wrapper">
                 <div class="letters">
                   <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
                   <span class="letter">c</span><span class="letter">i</span><span class="letter">s</span><span class="letter">e</span>
                   <span class="letter">:</span><span class="letter">2</span><span class="letter">2</span>
-                  <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span></div>
+                  <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span>
+                </div>
                 <!--p>Generate Random Text Transformation Using CSS Only</p-->
               </div>
+<<<<<<< HEAD
             </div>
             <div>
+=======
+>>>>>>> master
               <h2 id="titlebarometerforday"> Barometer value: </h2>
               <p id="barometerforday">{{ day_barometer }}</p>
             </div>
@@ -921,13 +926,6 @@
     -webkit-animation: shadow-r-n .425s ease-in-out infinite alternate;
     animation: shadow-r-n .425s ease-in-out infinite alternate;
   }
-
-  // body{
-  //   background:#89b6d3;
-  //   overflow:hidden;
-  //   z-index:1;
-  // }
-
   .bubble{
     position:absolute;
     top:100;
@@ -1026,14 +1024,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>
 import BarChart from "../components/BarChart.vue";
+<<<<<<< HEAD
 import tempChart from "../components/tempChart.vue";
+=======
+import DayBarChart from "../components/DayBarChart.vue";
+>>>>>>> master
 import axios from 'axios'
 
 export default {
   name: 'home',
   data() {
     return {
+<<<<<<< HEAD
       temp: {},
+=======
+      temp_dataset:{
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ],
+        datasets: [
+          {
+            label: "a bar chart",
+            backgroundColor: "#f87979",
+            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+          }
+        ]
+      },
+      temp_chartoptions:{
+        responsive: false,
+        maintainAspectRatio: false 
+      },
+>>>>>>> master
       shouldRender: false,
       weekdata: {},
       exercise_time: 0,
@@ -1057,32 +1089,36 @@ export default {
       },
       options: [{
         value: '1201120212031204120512061207',
-        label: '191201-191207'
+        label: '2019/12/01 - 2019/12/07'
       }, {
         value: '1208120912101211121212131214',
-        label: '191208-191214'
+        label: '2019/12/08 - 2019/12/14'
       }, {
         value: '1215121612171218121912201221',
-        label: '191215-191223'
+        label: '2019/12/15 - 2019/12/23'
       }, {
         value: '1222122312241225122612271228',
-        label: '191222-191228'
+        label: '2019/12/22 - 2019/12/28'
       }, {
         value: '1229123012310101010201030104',
-        label: '191229-200104'
+        label: '2019/12/29 - 2020/01/04'
       }, {
         value: '0105010601070108010901100111',
-        label: '200105-200111'
+        label: '2020/01/05 - 2020/01/11'
       }, {
         value: '0112011301140115011601170118',
-        label: '200112-200118'
+        label: '2020/01/12 - 2020/01/18'
       }],
       value: '0105010601070108010901100111'
     }
   },
   components: {
     BarChart,
+<<<<<<< HEAD
     tempChart
+=======
+    DayBarChart
+>>>>>>> master
   },
   methods: {
     completeRender() {
