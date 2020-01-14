@@ -1,17 +1,24 @@
 <template>
 	<div>
-    <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" width="1550" height="800">
+    
     <!--h1>ICN Final Project API Example</h1>
     <button id="test_button" @click="callApi">Call API</button-->
 
     <!-- <h1>Example</h1>
     <button id="test_button" @click="callApi">Call API</button> -->
-    
+    <img id="runner" src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/82143154_2435649739891114_7942322333434249216_o.jpg?_nc_cat=101&_nc_ohc=zcujXxe4XHkAX8zD02i&_nc_ht=scontent-hkg3-1.xx&oh=beb7eeb940b382ad2bed13fe004c1717&oe=5E8EFAD2" >
     <hr>
     <div>
       <el-tabs :tab-position="tabPosition" style="height: 710px;">
         <el-tab-pane label="Welcome">
-          <h1>Welcome</h1>
+          <div  class="introduction">
+            <h1>Welcome</h1>
+            <div>
+              <p id="text_introduction"> 追蹤使用者的活動情況是否隨著環境溫溼度改變 </p><br>
+              <p id="text_introduction"> 提供使用者檢視自己的活動程度的平台 </p><br>
+              <p id="text_introduction"> 了解自身的習慣進而促進平日活動量 </p><br>
+            </div>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="Daily Report">
           <div  class="DailyData">
@@ -28,6 +35,14 @@
             </div>
             <div>
               <h2 id="TotalHour">Pass 2 months</h2> 
+              <div class="wrapper">
+                <div class="letters">
+                  <span class="letter">e</span><span class="letter">x</span><span class="letter">e</span><span class="letter">r</span>
+                  <span class="letter">c</span><span class="letter">i</span><span class="letter">s</span><span class="letter">e</span>
+                  <span class="letter">:</span><span class="letter">2</span><span class="letter">0</span>
+                  <span class="letter">d</span><span class="letter">a</span><span class="letter">y</span><span class="letter">s</span></div>
+                <!--p>Generate Random Text Transformation Using CSS Only</p-->
+            </div>
               <h2 id="titlebarometerforday"> Barometer value: </h2>
               <p id="barometerforday">First Barometer value</p>
             </div>
@@ -47,14 +62,6 @@
         </el-tab-pane>
         <el-tab-pane label="Weekly Report">
           <h1>Weekly Report</h1>
-          <!-- <div>
-            <h2> Humudity value: </h2>
-            <p id="humidity">First Humudity value</p>
-          </div>
-          <div>
-            <h2> Temperature value: </h2>
-            <p id="temperature">First Temperature value</p>
-          </div> -->
           <div class="SelectWeek">
             <el-select v-model="value" placeholder="--SelectWeek--">
               <el-option
@@ -66,13 +73,10 @@
             </el-select>
           </div>
         </el-tab-pane>
-        <BarChart :dataset="dataa" :chartoptions="chartoptions"/>
+        <button id="test_button" @click="callApi">Call API</button>
+        <BarChart v-bind:dataset="weekdata" v-bind:chartoptions="chartoptions" :shouldRender="shouldRender" @completeRender="completeRender" />
       </el-tabs>
     </div>
-    <h1 class="ml15">
-      <span class="word">Out</span>
-      <span class="word">now</span>
-    </h1>
     <hr>
     <div class="bottom">
       <p id="social_media">get in touch</p>
@@ -102,17 +106,10 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  .ml15 {
-    font-weight: 800;
-    font-size: 3.8em;
-    text-transform: uppercase;
-    letter-spacing: 0.5em;
-  }
-
-  .ml15 .word {
-    display: inline-block;
-    line-height: 1em;
+<style lang="scss" scoped> 
+  #runner {
+    width: 100vw;
+    height: 100vh;
   }
   p {
     color:aquamarine;
@@ -145,10 +142,29 @@
   #headerforday{
     color: #698474;
   }
+  .introduction{
+    margin-top:10px; 
+    background-color:white;
+    position:relative;
+    width: 1400px;
+    height: 750px;
+
+    #text_introduction{
+      position:relative;
+      top:150px;
+      left:0px;
+      color: #8bbabb;
+      font-family:Microsoft JhengHei;
+      font-size:23px;
+      font-weight : bold;
+      letter-spacing:8px;
+      word-spacing:5px;
+    }
+  }
   .DailyData{
     margin-top:10px; 
     background-color:white;
-    osition:relative;
+    position:relative;
     width: 1400px;
     height: 750px;
 
@@ -261,6 +277,298 @@
       left:-710px;
     }
   }
+  // body {
+  //   text-align: center;
+  //   background-color: #1a3e59;
+  // }
+  .wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    margin-top:-100px;
+    margin-left:-450px;
+    font-size: 0;
+    transform: translate(-50%);
+  }
+  .letter {
+    width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0;
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #6c7b95;
+  }
+  .letter:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    word-break: break-all;
+    background-color: #e4f9ff;
+  }
+  .letter:nth-child(1):before {
+    content: "2851409736";
+    margin-top: -216px;
+    animation-name: letter1;
+    animation-duration: 0.108s;
+    animation-delay: 0.97s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter1 {
+    from {
+      margin-top: -216px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(2):before {
+    content: "6025841397";
+    margin-top: -144px;
+    animation-name: letter2;
+    animation-duration: 3.1542857143s;
+    animation-delay: 0.08s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter2 {
+    from {
+      margin-top: -144px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(3):before {
+    content: "8573126049";
+    margin-top: -120px;
+    animation-name: letter3;
+    animation-duration: 1.0333333333s;
+    animation-delay: 0.69s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter3 {
+    from {
+      margin-top: -120px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(4):before {
+    content: "6290387451";
+    margin-top: -144px;
+    animation-name: letter4;
+    animation-duration: 1.7828571429s;
+    animation-delay: 0.48s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter4 {
+    from {
+      margin-top: -144px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(5):before {
+    content: "9207483651";
+    margin-top: -48px;
+    animation-name: letter5;
+    animation-duration: 2s;
+    animation-delay: 0.25s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter5 {
+    from {
+      margin-top: -48px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(6):before {
+    content: "4215890763";
+    margin-top: -144px;
+    animation-name: letter6;
+    animation-duration: 1.5771428571s;
+    animation-delay: 0.54s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter6 {
+    from {
+      margin-top: -144px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(7):before {
+    content: "8341652970";
+    margin-top: -120px;
+    animation-name: letter7;
+    animation-duration: 1.3666666667s;
+    animation-delay: 0.59s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter7 {
+    from {
+      margin-top: -120px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(8):before {
+    content: "4673082915";
+    margin-top: -168px;
+    animation-name: letter8;
+    animation-duration: 2.8s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter8 {
+    from {
+      margin-top: -168px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(9):before {
+    content: "3416580972";
+    margin-top: -72px;
+    animation-name: letter9;
+    animation-duration: 2.61s;
+    animation-delay: 0.13s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter9 {
+    from {
+      margin-top: -72px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(10):before {
+    content: "2365940817";
+    margin-top: -168px;
+    animation-name: letter10;
+    animation-duration: 0.175s;
+    animation-delay: 0.95s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter10 {
+    from {
+      margin-top: -168px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(11):before {
+    content: "2810473956";
+    margin-top: -72px;
+    animation-name: letter11;
+    animation-duration: 0.87s;
+    animation-delay: 0.71s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter11 {
+    from {
+      margin-top: -72px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(12):before {
+    content: "9078132645";
+    margin-top: -24px;
+    animation-name: letter12;
+    animation-duration: 1.92s;
+    animation-delay: 0.04s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter12 {
+    from {
+      margin-top: -24px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(13):before {
+    content: "4513968027";
+    margin-top: -96px;
+    animation-name: letter13;
+    animation-duration: 1.28s;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter13 {
+    from {
+      margin-top: -96px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(14):before {
+    content: "8362049175";
+    margin-top: -192px;
+    animation-name: letter14;
+    animation-duration: 3.0222222222s;
+    animation-delay: 0.15s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter14 {
+    from {
+      margin-top: -192px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(15):before {
+    content: "8091674325";
+    margin-top: -192px;
+    animation-name: letter15;
+    animation-duration: 2.1333333333s;
+    animation-delay: 0.4s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter15 {
+    from {
+      margin-top: -192px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
+  .letter:nth-child(16):before {
+    content: "3610987425";
+    margin-top: 0px;
+    animation-name: letter16;
+    animation-duration: 0s;
+    animation-delay: 0.58s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes letter16 {
+    from {
+      margin-top: 0px;
+    }
+    to {
+      margin-top: 24px;
+    }
+  }
 
 </style>
 
@@ -273,6 +581,10 @@ export default {
   name: 'home',
   data() {
     return {
+      shouldRender: false,
+      weekdata: {},
+      all_data: {},
+      week_selected: "0105010601070108010901100111",
       pickerOptions: {
          disabledDate: (time) => {
           return this.dealDisabledDate(time)
@@ -280,31 +592,6 @@ export default {
       },
       dayselect: '',
       tabPosition: 'right',
-      dataa: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: "#fed39f",
-            borderWidth: 4,
-            borderSkipped: false,
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-          }
-        ]
-      },
       chartoptions: {
         responsive: true,
         maintainAspectRatio: false
@@ -323,7 +610,7 @@ export default {
         label: '191222-191228'
       }, {
         value: '1229-1230-1231-0101-0102-0103-0104',
-        label: '1229-200104'
+        label: '191229-200104'
       }, {
         value: '0105-0106-0107-0108-0109-0110-0111',
         label: '200105-200111'
@@ -337,6 +624,8 @@ export default {
   components: {
     BarChart
   },
+  
+
   // async mounted() {
   //   try {
   //     await anime.timeline({loop: true})
@@ -358,32 +647,91 @@ export default {
   //     console.eerror('[error]')
   //   }
   // },
+
   methods: {
+    completeRender() {
+      this.shouldRender = false;
+    },
     dealDisabledDate (time) {
       let day = 60 * 24 * 3600 * 1000
       return time.getTime() > Date.now() || time.getTime() + day < Date.now()
     },
     callApi: function () {
       var macaddr = "?macaddr=" + "aa15ec12";
-      //var date_filter = "&date_filter=" + "2020-1-12 21:00:00+-+2020-1-10 18:00:00";
+      //var date_filter = "&date_filter=" + "2019-12-8 00:00:00+-+2020-1-13 15:54:00";
       axios.post("https://campus.kits.tw/ICN_API" + macaddr/* + date_filter*/, 
                   null,
                   { headers: {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImMzMDU5NTFjZGJmNGQ4MDM4M2IxOTA5MDhlNzBlOGZmMzA2Y2RkNjhhOWZhNTY1MWFlZTA0NzNkMTEwYTgwN2Y2MTgwMGZiMGI3NDhhZjdmIn0.eyJhdWQiOiIyIiwianRpIjoiYzMwNTk1MWNkYmY0ZDgwMzgzYjE5MDkwOGU3MGU4ZmYzMDZjZGQ2OGE5ZmE1NjUxYWVlMDQ3M2QxMTBhODA3ZjYxODAwZmIwYjc0OGFmN2YiLCJpYXQiOjE1NzYxNTkxMzEsIm5iZiI6MTU3NjE1OTEzMSwiZXhwIjoxNjA3NzgxNTMxLCJzdWIiOiIyNTIiLCJzY29wZXMiOltdfQ.hDDzk7StTJ0czRT8vHPJoQYxhTpbrr2auYdXyewXFW6yYtBdZFpRshsrRfLbX4pNXhQq_Q1orEe7gO0w_3HukCwWvXf0ajNL-Zvmuay5wcbiIYTaL_-w7nWtTshUVnOw2lX6DKHdxY1Q17nJvK0o39leChMAeIc88Oabx3gCprny983kA4LDwyPd3S5_Eu8J7i5giuR_ul3PF37W5Z2ymNRR3RBZaJkV2IEQAsHhiMmuNpjcKZXvU3zegS6Q-2dviNQsKWYnrSN8rMeq5xljDaOzCR-ueWDuDgmpYOo_nGqQusRJbLGdPy9BGs0_pWgb-yD2e4Fu34fBzg_CLaffSFaKxFEoz12GHwGfczu2NeVH69jp8vvuAzRBfo1Gm8PboBhm07MX3jlXhTM-P6IX4GxjfDcZFFVO7gygOJ6GRRM_1WtvB9XmEu2mA-AJ_BC08GU0JKx_qLo3N17WwnxPoaqNrqJ-v8RwBRBAfyVmUqh7nbJTLw4SnUYkoyjV6KX_RGIcT8Ovr4upyoDmYgnKwxy1Tsh3yMVgg7jGTMw_3IxgOdxcIn2H6pWQCYUqhp8NJuzvhDAz7XdwbAeJuYr6LwX-3Ei1KWHD04kzI8GZmfwmvPMxQGgLEkMVc028YM2cFPYtuGBRFxcxw3vmTB1dR7kAQ1W4u_ksfk415Ri6NQ4', 
                                                       'Accept': 'application/json'}
       })
-        .then((data) => {
-           console.log(data);
-        })
-        .catch((err) => {
-          if (err.status === '200') {
-            alert('API calling error: macaddr or url format error!')
-          } else {
-            alert('API is sleeping !')
+      .then((response) => {
+          console.log(response);
+          /* 會用到的變數 */
+          var count = 0;
+          var data_num = response["data"]["length"]
+          var cur_date = response["data"][0]["created_at"].substring(5, 10)
+          console.log(cur_date)
+          var all_shaking_count = {}
+
+          for(var i  = 0; i < data_num; i++) {
+            var acc_x = response["data"][i]["acc_x"]
+            var acc_y = response["data"][i]["acc_y"]
+            var acc_z = response["data"][i]["acc_z"]
+
+            /* 若是當前進來的資料時間與前一個不同，表示已經是下一天了 */
+            if (response["data"][i]["created_at"].substring(5, 10) != cur_date) {
+              all_shaking_count[cur_date] = count
+              count = 0
+              cur_date = response["data"][i]["created_at"].substring(5, 10)
+            }
+
+            /* 如果有震動，count++ */
+            if (acc_x != null || acc_y != null || acc_z != null){
+              count++;
+            }
           }
-        })
+          all_shaking_count[cur_date] = count
+          this.all_data = all_shaking_count
+          //console.log(this.all_data)
+          this.weekBarChartData()
+      })
+      .catch((err) => {
+        if (err.status === '200') {
+          alert('API calling error: macaddr or url format error!')
+        } else {
+          alert(err)
+        }
+      })
+    },
+    weekBarChartData: function() {
+      var label = []
+      var data = []
+      for(var i = 0; i < 7; i++)
+      {
+        var cur_date = this.week_selected.substring(i*4, i*4+2) + "-" + this.week_selected.substring(i*4+2, i*4+4)
+        /* 抓要畫的日期 */
+        label.push(cur_date)
+
+        /* 抓要畫的震動資料 */
+        if (this.all_data.hasOwnProperty(cur_date)) {
+          data.push(this.all_data[cur_date])
+        } else {
+          data.push(0)
+        }
       }
+
+      /* 把資料丟給weekdata */
+      this.weekdata["labels"] = label
+      this.weekdata["datasets"] = [{
+        label: "Weekly Analysis",
+        backgroundColor: "#3282b8",
+        data: data
+      }]
+      console.log(this.weekdata)
+      /*要再重新畫一次圖*/
+      this.shouldRender = true
+    },
   }
 }
 
 </script>
-
