@@ -40,7 +40,7 @@
                 value-format="yyyy-MM-dd"
                 placeholder="Choose the date">
               </el-date-picker>
-              <DayBarChart v-bind:dataset="day_data" v-bind:chartoptions="temp_chartoptions" :shouldRender="dayShouldRender" @completeRender="dayCompleteRender"/>
+              <DayBarChart id="daybarchart" v-bind:dataset="day_data" v-bind:chartoptions="temp_chartoptions" :shouldRender="dayShouldRender" @completeRender="dayCompleteRender"/>
             </div>
             <div> 
               <i class="el-icon-odometer"></i> 
@@ -63,7 +63,7 @@
               <p id="barometerforday">{{ day_barometer }}</p>
             </div>
             <div>
-              <h2 id="titlehumidityforday"> Humudity value: </h2>
+              <h2 id="titlehumidityforday"> Humidity value: </h2>
               <p id="humidityforday">{{ day_humidity }}</p>
             </div>
             <div>
