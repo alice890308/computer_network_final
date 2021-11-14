@@ -1,29 +1,31 @@
-# vue_test
+# Computer Network Final Project
+Developed a website to display the data collected by the multi-sensor device.
 
-## Project setup
+## vue_test
+
+### Project setup
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+-  Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+- Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Run your tests
+- Run your tests
 ```
 npm run test
 ```
 
-### Lints and fixes files
+- Lints and fixes files
 ```
 npm run lint
 ```
 
-### Customize configuration
+- Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
